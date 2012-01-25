@@ -10,7 +10,7 @@ function html_header($title = "Untitled", $styles = null, $scripts = null) {
 	<meta charset="utf-8" />
 	<title>$title</title>
 END;
-
+	$string .= "\n";
 	if (is_array($styles)) {
 		foreach ($styles as $style) {
 			$string .= "<link type='text/css' rel='stylesheet' href='$style' />\n";
@@ -47,10 +47,71 @@ END;
 	return $string;
 }
 
-function getSurveys() {
+function startDiv($id, $class=""){
+	return "<div id='$id' class='$class'>"."\n";
+}
+
+function endDiv($id){
+	return "</div> <!-- id='$id' -->"."\n";
+}
+
+// create the banner div
+function addBanner() {
+	// start div
+	$string = "\t" . "\t" . '<div id="banner">' . "\n";
+
+	$string .= "\t" . "\t" . '<h1>Banner</h1>' . "\n";
+
+	// end div
+	$string .= "\t" . "\t" . '</div> <!-- id=banner -->' . "\n";
+
+	return $string;
+}
+
+function addNav() {
+	$result = "\t".file_get_contents("nav.html");
+
+	if (!$result) {
+		$result = "";
+	}
+	
+	return $result;
+}
+
+function addTakeSurveyLinks($class=""){
+	if(!empty($class)){
+		$class .= " class='$class'";
+	}
+	
+	// setup the List
+	$result = "<ul".$class.">"; 
+	
+	// grab all the available surveys
+	$surveys = getSurveys();
+	
+	// print_r($surveys);
+	
+	// display each as a list item
+	foreach($surveys as $survey){
+		// echo "<br />".$survey."<br />";
+		$result .= "<li>$survey</li>";
+		
+		// echo htmlspecialchars($result)."\n"; 
+	}
+	
+	// close the List
+	$result .= "</ul>"; // <!-- $class -->";
+	
+	echo htmlspecialchars($result)."\n"; 
+		
+	// return
+	return $result;
+}
+
+function getSurveys($dir = XML_PATH) {
 	$result = array();
 
-	if ($handle = opendir(XML_PATH)) {
+	if ($handle = opendir($dir)) {
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				$result[] = $entry;
@@ -61,17 +122,8 @@ function getSurveys() {
 
 	return $result;
 }
-
-function getXSLTProcessor($fileName){
-	
-}
 ?>
 
-
-
 <?php
-
-//test
-	print_r(getSurveys());
 
 ?>

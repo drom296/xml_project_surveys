@@ -15,7 +15,9 @@
 		<div id="page">
 			<div id="header">
 				<!-- banner -->
-				<h1>Banner</h1>
+				<div>
+					<h1>Banner</h1>
+				</div>
 				<!-- menu -->
 				<div id="navDiv">
 					<ul id="nav">
