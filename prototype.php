@@ -35,38 +35,24 @@
 						</li>
 						<li>
 							<a href="">Admin</a>
+							<ul>
+								<li>
+									<a>Add Survey</a>
+								</li>
+								<li>
+									<a>Edit Survey</a>
+								</li>
+								<li>
+									<a>Delete Survey</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
-					<!-- <ul id="nav">
-					<li>
-					<a>Home</a>
-					</li>
-					<li>
-					<a>Surveys</a>
-					<ul>
-					<li>
-					<a>Take a Survey</a>
-					</li>
-					<li>
-					<a>View Survey Results</a>
-					</li>
-					</ul>
-					</li>
-					<li>
-					<a>Admin</a>
-					<ul>
-					<li><a>Add Survey</a></li>
-					<li><a>Edit Survey</a></li>
-					<li><a>Delete Survey</a></li>
-					</ul>
-					</li>
-					</ul> -->
-					<!-- clear the float -->
-<!-- 					<p class="noFloat"></p> -->
 				</div>
 			</div>
-			<div id="content" class="noFloat">
-				<h1>Content</h1>
+			<div id="content" class="roundBox">
+				<h1>Welcome</h1>
+				<p>This would say some info about this site, its purpose and goal.</p>
 			</div>
 			<div id="footer">
 				<!-- copyright info -->

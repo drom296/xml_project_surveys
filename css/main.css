@@ -8,6 +8,9 @@
 .none{
 	display:none;
 }
+p{
+/*	margin: 1%;*/
+}
 body {
 	background-color: #776655;
 	color: #555544;
@@ -30,8 +33,15 @@ body {
 	/*	background-color: rgb(204,187,136);*/
 	/*	background-color: rgba(204,187,136,.5);*/
 }
+#content{
+	margin-top: 4%;
+	padding: 1%;
+}
 .roundBox {
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
+}
+#content h1{
+	text-align: center;
 }
