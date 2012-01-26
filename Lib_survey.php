@@ -3,7 +3,8 @@
 define("XML_PATH", "xml");
 define("TAKE_SURVEY_TITLE", "Choose a Survey");
 define("TAKE_SURVEY_PAGE","take_survey.php");
-define("TAKE_SURVEY_CLASS","");
+define("TAKE_SURVEY_CLASS","noBullet");
+define("TAKE_SURVEY_DIV_CLASS","center40 textCenter");
 
 function html_header($title = "Untitled", $styles = null, $scripts = null) {
 	$string = <<<END
@@ -82,12 +83,16 @@ function addNav() {
 }
 
 function addTakeSurveyLinks(){
-	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, TAKE_SURVEY_CLASS);
+	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, TAKE_SURVEY_DIV_CLASS, TAKE_SURVEY_CLASS);
 }
 
-function addSurveyLinks($title="Surveys", $page="", $class=""){
+function addSurveyLinks($title="Surveys", $page="", $divClass="",$class=""){
 	if(!empty($class)){
 		$class = " class='$class'";
+	}
+	
+	if(!empty($divClass)){
+		$divClass = " class='$divClass'";
 	}
 	
 	if(!empty($page)){
@@ -97,7 +102,7 @@ function addSurveyLinks($title="Surveys", $page="", $class=""){
 	$result = "";
 	
 	// setup the container div
-	$result .= "<div>"."\n";
+	$result .= "<div$divClass>"."\n";
 	
 	// Setup the title
 	$result .= "\t<h2>$title</h2>"."\n";

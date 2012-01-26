@@ -8,6 +8,16 @@
 .none{
 	display:none;
 }
+.noBullet{
+	list-style-type: none;
+}
+.center40{
+	width:40%;
+	margin: auto;
+}
+.textCenter{
+	text-align: center;
+}
 p{
 /*	margin: 1%;*/
 }
