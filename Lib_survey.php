@@ -1,6 +1,9 @@
 <?php
 
 define("XML_PATH", "xml");
+define("TAKE_SURVEY_TITLE", "Choose a Survey");
+define("TAKE_SURVEY_PAGE","take_survey.php");
+define("TAKE_SURVEY_CLASS","");
 
 function html_header($title = "Untitled", $styles = null, $scripts = null) {
 	$string = <<<END
@@ -78,23 +81,34 @@ function addNav() {
 	return $result;
 }
 
-function addTakeSurveyLinks($class=""){
+function addTakeSurveyLinks(){
+	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, TAKE_SURVEY_CLASS);
+}
+
+function addSurveyLinks($title="Surveys", $page="", $class=""){
 	if(!empty($class)){
-		$class .= " class='$class'";
+		$class = " class='$class'";
 	}
 	
-	// setup the List
-	$result = "<ul".$class.">"; 
+	if(!empty($page)){
+		$page = " href='$page'";
+	}
+	
+	// Setup the title
+	$result = "<h2>$title</h2>";
 	
 	// grab all the available surveys
 	$surveys = getSurveys();
+	
+	// setup the List
+	$result = "<ul".$class.">"; 
 	
 	// print_r($surveys);
 	
 	// display each as a list item
 	foreach($surveys as $survey){
 		// echo "<br />".$survey."<br />";
-		$result .= "<li>$survey</li>";
+		$result .= "<li><a".$page."&survey=$survey>$survey</a></li>";
 		
 		// echo htmlspecialchars($result)."\n"; 
 	}

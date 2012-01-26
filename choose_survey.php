@@ -26,8 +26,6 @@ $output .= endDiv("header");
 $output .= startDiv("content", "roundBox");
 
 // create list of available to take
-$output .= "<h1>Welcome</h1>"."\n";
-$output .= "<p>This would say some info about this site, its purpose and goal.</p>"."\n";
 $output .= addTakeSurveyLinks();
 
 // end the content section
