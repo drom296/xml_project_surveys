@@ -91,32 +91,40 @@ function addSurveyLinks($title="Surveys", $page="", $class=""){
 	}
 	
 	if(!empty($page)){
-		$page = " href='$page'";
+		$page = " href='$page";
 	}
 	
+	$result = "";
+	
+	// setup the container div
+	$result .= "<div>"."\n";
+	
 	// Setup the title
-	$result = "<h2>$title</h2>";
+	$result .= "\t<h2>$title</h2>"."\n";
 	
 	// grab all the available surveys
 	$surveys = getSurveys();
 	
 	// setup the List
-	$result = "<ul".$class.">"; 
+	$result .= "\t<ul".$class.">"."\n"; 
 	
 	// print_r($surveys);
 	
 	// display each as a list item
 	foreach($surveys as $survey){
 		// echo "<br />".$survey."<br />";
-		$result .= "<li><a".$page."&survey=$survey>$survey</a></li>";
+		$result .= "\t\t<li><a".$page."&survey=$survey'>$survey</a></li>"."\n";
 		
 		// echo htmlspecialchars($result)."\n"; 
 	}
 	
 	// close the List
-	$result .= "</ul>"; // <!-- $class -->";
+	$result .= "\t</ul>"."\n"; // <!-- $class -->";
 	
-	echo htmlspecialchars($result)."\n"; 
+	// close the container div
+	$result .= "</div>"."\n";
+	
+	// echo htmlspecialchars($result)."\n"; 
 		
 	// return
 	return $result;
