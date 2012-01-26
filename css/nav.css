@@ -39,6 +39,10 @@
 /******************Other**********************/
 #navDiv {
 }
+#nav{
+	float:left;
+	width: 100%;
+}
 #nav, #nav ul {
 	list-style: none;
 	padding: 0;
@@ -48,6 +52,7 @@
 	font-weight: bold;
 	text-decoration: none;
 	display: block;
+/*	float:left;*/
 }
 #nav li {
 	float: left;
@@ -57,6 +62,9 @@
 	cursor: default;
 	border: 1px solid;
 	border-width: 0px 0px 1px 0px;
+}
+#nav>li{
+/*	margin-left: 1px;*/
 }
 #nav > li > a {
 	letter-spacing: 10px;
