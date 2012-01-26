@@ -6,12 +6,12 @@ define("XML_PATH", "xml/");
 
 define("TAKE_SURVEY_TITLE", "Choose a Survey");
 define("TAKE_SURVEY_CLASS", "noBullet");
-define("TAKE_SURVEY_DIV_CLASS", "marginCenter width40 textCenter");
+define("TAKE_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
 define("TAKE_SURVEY_PAGE", "take_survey.php");
 
 define("DELETE_SURVEY_TITLE", "Choose a Survey to Delete");
 define("DELETE_SURVEY_CLASS", "noBullet");
-define("DELETE_SURVEY_DIV_CLASS", "marginCenter width40 textCenter");
+define("DELETE_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
 define("DELETE_SURVEY_PAGE", "delete_survey.php");
 
 define("SURVEY_FIELD", "survey");
@@ -138,7 +138,7 @@ function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class =
 	$result .= "<div$divClass>" . "\n";
 
 	// Setup the title
-	$result .= "\t<h2>$title</h2>" . "\n";
+	$result .= "\t<h1>$title</h1>" . "\n";
 
 	// grab all the available surveys
 	$surveys = getSurveys();
