@@ -11,13 +11,23 @@
 .noBullet{
 	list-style-type: none;
 }
-.center40{
+.width40{
 	width:40%;
+}
+.marginCenter{
 	margin: auto;
+}
+.width70{
+	width:70%;
 }
 .textCenter{
 	text-align: center;
 }
+.surveyForm > h2{
+	text-align: center;
+	margin-top: 2%;
+}
+
 p{
 /*	margin: 1%;*/
 }
@@ -40,6 +50,7 @@ body {
 #content, #header, #footer {
 	background-color: #ee8844;
 	margin-top: 2%;
+	
 	/*	background-color: rgb(204,187,136);*/
 	/*	background-color: rgba(204,187,136,.5);*/
 }
@@ -54,4 +65,5 @@ body {
 }
 #content h1{
 	text-align: center;
+	border-bottom: 5px solid #660011;
 }

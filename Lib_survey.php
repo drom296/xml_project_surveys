@@ -6,10 +6,10 @@ define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 define("XML_PATH", "xml/");
 define("TAKE_SURVEY_TITLE", "Choose a Survey");
 define("TAKE_SURVEY_CLASS", "noBullet");
-define("TAKE_SURVEY_DIV_CLASS", "center40 textCenter");
+define("TAKE_SURVEY_DIV_CLASS", "marginCenter width40 textCenter");
 define("SURVEY_FIELD", "survey");
 define("SURVEY_FORM_XSLT", "xsl/survey.xslt");
-define("SURVEY_FORM_class", "center70");
+define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
 
 function html_header($title = "Untitled", $styles = null, $scripts = null) {
 	$string = <<<END
@@ -157,7 +157,7 @@ function getSurveys($dir = XML_PATH) {
 }
 
 function addSurveyForm($survey) {
-	return xml_transform(XML_PATH.$survey, SURVEY_FORM_XSLT);
+	return xml_transform(XML_PATH.$survey, SURVEY_FORM_XSLT, SURVEY_FORM_CLASS);
 }
 
 function xml_transform($xml, $xslt, $divClass="") {
