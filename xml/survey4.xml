@@ -1,1 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<surveys>
+	<survey>
+		<name>Test 4</name>
+		<questions>
+			<question id="1">
+				<question_text>What is the first letter of the alphabet?</question_text>
+				<answer count="2">
+					<answer_text>A</answer_text>
+				</answer>
+				<answer count="0">
+					<answer_text>B</answer_text>
+				</answer>
+			</question>
+			<question id="2">
+				<question_text>What color is the sky?</question_text>
+				<answer count="1">
+					<answer_text>Blue</answer_text>
+				</answer>
+				<answer count="1">
+					<answer_text>Green</answer_text>
+				</answer>
+			</question>
+		</questions>
+	</survey>
+</surveys>

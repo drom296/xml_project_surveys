@@ -1,5 +1,5 @@
 <?php
-require("LIB_survey.php");
+require("Lib_survey.php");
 
 $styles = array("css/nav.css", "css/main.css");
 

@@ -196,5 +196,3 @@ function xml_transform($xml, $xslt, $divClass="") {
 	return $result;
 }
 ?>
-
-<?php?>

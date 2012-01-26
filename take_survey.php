@@ -1,5 +1,5 @@
 <?php
-require("LIB_survey.php");
+require("Lib_survey.php");
 
 $survey = $_GET[SURVEY_FIELD];
 
@@ -11,7 +11,7 @@ if(empty($survey)){
 $styles = array("css/nav.css", "css/main.css");
 
 // create header tags
-$output = html_header("Choose a Survey", $styles);
+$output = html_header("$survey", $styles);
 
 // HEADER Section *****************************************
 
