@@ -27,6 +27,17 @@
 	text-align: center;
 	margin-top: 2%;
 }
+.acknowledgeDiv{
+	width: 50%;
+	margin: auto;
+	text-align: center;
+	padding: 1%;
+	background-color: #660011;
+	color: #fad2aa;
+}
+.acknowledgeDiv>p>span{
+	font-weight: bold;
+}
 
 p{
 /*	margin: 1%;*/

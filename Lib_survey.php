@@ -1,12 +1,19 @@
 <?php
 
-define("TAKE_SURVEY_PAGE", "take_survey.php");
 define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 
 define("XML_PATH", "xml/");
+
 define("TAKE_SURVEY_TITLE", "Choose a Survey");
 define("TAKE_SURVEY_CLASS", "noBullet");
 define("TAKE_SURVEY_DIV_CLASS", "marginCenter width40 textCenter");
+define("TAKE_SURVEY_PAGE", "take_survey.php");
+
+define("DELETE_SURVEY_TITLE", "Choose a Survey to Delete");
+define("DELETE_SURVEY_CLASS", "noBullet");
+define("DELETE_SURVEY_DIV_CLASS", "marginCenter width40 textCenter");
+define("DELETE_SURVEY_PAGE", "delete_survey.php");
+
 define("SURVEY_FIELD", "survey");
 define("SURVEY_FORM_XSLT", "xsl/survey.xslt");
 define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
@@ -56,12 +63,29 @@ END;
 	return $string;
 }
 
-function startDiv($id, $class = "") {
-	return "<div id='$id' class='$class'>" . "\n";
+function startDiv($id = "", $class = "") {
+	$idPart = "";
+	$classPart = "";
+
+	if (!empty($id)) {
+		$idPart = "id='$id'";
+	}
+
+	if (!empty($class)) {
+		$classPart = "class='$class'";
+	}
+
+	return "<div $idPart $classPart>" . "\n";
 }
 
-function endDiv($id) {
-	return "</div> <!-- id='$id' -->" . "\n";
+function endDiv($id = "") {
+	$idPart = "";
+
+	if (!empty($id)) {
+		$idPart = "id='$id'";
+	}
+
+	return "</div> <!-- $idPart -->" . "\n";
 }
 
 // create the banner div
@@ -89,6 +113,10 @@ function addNav() {
 
 function addTakeSurveyLinks() {
 	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, TAKE_SURVEY_DIV_CLASS, TAKE_SURVEY_CLASS);
+}
+
+function addDeleteSurveyLinks() {
+	return addSurveyLinks(DELETE_SURVEY_TITLE, DELETE_SURVEY_PAGE, DELETE_SURVEY_DIV_CLASS, DELETE_SURVEY_CLASS);
 }
 
 function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class = "") {
@@ -157,10 +185,10 @@ function getSurveys($dir = XML_PATH) {
 }
 
 function addSurveyForm($survey) {
-	return xml_transform(XML_PATH.$survey, SURVEY_FORM_XSLT, SURVEY_FORM_CLASS);
+	return xml_transform(XML_PATH . $survey, SURVEY_FORM_XSLT, SURVEY_FORM_CLASS);
 }
 
-function xml_transform($xml, $xslt, $divClass="") {
+function xml_transform($xml, $xslt, $divClass = "") {
 	$result = "";
 	if (!empty($divClass)) {
 		$divClass = " class='$divClass'";
@@ -169,30 +197,61 @@ function xml_transform($xml, $xslt, $divClass="") {
 	// setup the container div
 	$result .= "<div$divClass>" . "\n";
 
-	echo $xml;
-
 	// load the xml
 	$xmlDom = new DomDocument();
 	// load XML File into DOM
 	$xmlDom -> load($xml);
-	
+
 	// load the xslt
 	$xslDom = new DomDocument();
 	// load XSL File into DOM
 	$xslDom -> load($xslt);
-	
+
 	// create XSLT Processor
 	$processor = new XSLTProcessor();
 	// import XSL DOM Object
 	$processor -> importStyleSheet($xslDom);
-	
+
 	// Apply XSL to XML and get HTML to append to result
 	$result .= $processor -> transformToXML($xmlDom);
-	
+
 	// close the container div
 	$result .= "</div>" . "\n";
 
 	// return the result
+	return $result;
+}
+
+function deleteSurvey($survey) {
+	$result = "";
+
+	// delete the file
+	$success = deleteFile(XML_PATH . $survey);
+
+	// create container
+	$result .= startDiv("", "acknowledgeDiv");
+
+	$result .= "<p>";
+	if ($success) {
+		$result .= "You have successfully deleted: <span>$survey</span>";
+	} else {
+		$result .= "Could not delete: <span>$survey</span>";
+	}
+	$result .= "</p>";
+
+	// close container
+	$result .= endDiv();
+
+	return $result;
+}
+
+function deleteFile($fileName) {
+	$result = false;
+
+	if (file_exists($fileName)) {
+		$result = unlink($fileName);
+	}
+
 	return $result;
 }
 ?>
