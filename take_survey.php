@@ -1,6 +1,13 @@
 <?php
 require("LIB_survey.php");
 
+$survey = $_GET[SURVEY_FIELD];
+
+// check to see if a survey was passed
+if(empty($survey)){
+	header('Location: '.CHOOSE_SURVEY_PAGE);
+}
+
 $styles = array("css/nav.css", "css/main.css");
 
 // create header tags
@@ -25,8 +32,8 @@ $output .= endDiv("header");
 // start the content section
 $output .= startDiv("content", "roundBox");
 
-// create list of available to take
-$output .= addTakeSurveyLinks();
+// add the survey form
+$output .= addSurveyForm($survey);
 
 // end the content section
 $output .= endDiv("content");
