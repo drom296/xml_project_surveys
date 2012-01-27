@@ -25,21 +25,27 @@ $output .= endDiv("header");
 // start the content section
 $output .= startDiv("content", "roundBox");
 
+$showLinks = true;
+
 // test to see if a survey was passed
 if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
 	$survey = $_GET[SURVEY_FIELD];
 	// check if it was submitted
-	if(false){
-		
-	} else{ 
+	
+	if (false) {
+
+	} else {
 		// else display the form
-		$output .= deleteSurvey($survey);
+		
+		$output .= editSurvey($survey);
+		$showLinks = false;
 	}
 }
 
-// create list of available to delete
-$output .= addEditSurveyLinks();
-
+// create list of available to edit
+if ($showLinks) {
+	$output .= addEditSurveyLinks();
+}
 // end the content section
 $output .= endDiv("content");
 

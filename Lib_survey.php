@@ -282,10 +282,19 @@ function editSurvey($fileName){
 	$xmlString = $xmlDom->saveXML()."\n";
 	
 	// create the textarea
-	$result .= "<textarea name='xml' class='width70 marginCenter roundBox'>$xmlString</textarea>";
+	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>".
+		htmlspecialchars($xmlString)."</textarea>";
+	
+	// add reset button
+	$result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
+
+	// add submit button
+	$result .= "<input type='submit' name='submit' value='submit'/>" . "\n";
 	
 	// create the form to display the file
 	$result .= "</form>"; 
+	
+	return $result;
 }
 
 ?>
