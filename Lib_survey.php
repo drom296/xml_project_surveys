@@ -1,6 +1,6 @@
 <?php
 
-$styles = array("css/nav.css", "css/main.css", "css/valign.css");
+$styles = array("css/nav.css", "css/main.css", "css/valign.css", array("ie", "css/valign_ie7.css"));
 
 define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 
@@ -41,7 +41,18 @@ END;
 	$string .= "\n";
 	if (is_array($styles)) {
 		foreach ($styles as $style) {
+			$ie = false;
+			if(is_array($style) && $style[0]=="ie"){
+				$ie = true;
+				$string .= "<!--[if lte IE 7]>";
+				$style = $style[1];
+			}
+			
 			$string .= "<link type='text/css' rel='stylesheet' href='$style' />\n";
+			
+			if($ie){
+				$string .= "<![endif]-->";
+			}
 		}
 	} else if (is_string($styles)) {
 		$string .= "<link type='text/css' rel='stylesheet' href='$styles' />\n";
