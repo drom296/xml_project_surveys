@@ -1,0 +1,12 @@
+/* example: http://emergentweb.com/test/valign.html */ 
+
+#outterDIV{
+	display: table; 
+	position: absolute; 
+	height: 100%; 
+	width: 100%
+}
+#middleDIV{
+	display: table-cell; 
+	vertical-align: middle
+}

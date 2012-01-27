@@ -1,8 +1,6 @@
 <?php
 require ("Lib_survey.php");
 
-$styles = array("css/nav.css", "css/main.css");
-
 // create header tags
 $output = html_header("Choose a Survey", $styles);
 
@@ -30,13 +28,13 @@ $showLinks = true;
 // test to see if a survey was passed
 if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
 	$survey = $_GET[SURVEY_FIELD];
-	// check if it was submitted
-	
-	if (false) {
 
+	// check if it was submitted, by checking for fileName, and xml
+	if (isset($_GET['xml']) && !empty($_GET['xml'])){
+		$output .= submitSurvey($survey, $_GET['xml']);
+		
 	} else {
 		// else display the form
-		
 		$output .= editSurvey($survey);
 		$showLinks = false;
 	}

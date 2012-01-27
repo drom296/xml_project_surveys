@@ -8,8 +8,6 @@ if(empty($survey)){
 	header('Location: '.CHOOSE_SURVEY_PAGE);
 }
 
-$styles = array("css/nav.css", "css/main.css");
-
 // create header tags
 $output = html_header("$survey", $styles);
 

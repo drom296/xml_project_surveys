@@ -1,0 +1,16 @@
+/* example: http://emergentweb.com/test/valign.html */ 
+
+#outterDIV{
+	display: inline-block; 
+	top: 0;
+}
+#middleDIV{
+	display: inline-block; 
+	top: 50%; 
+	position: relative;
+}
+#page{
+	display: inline-block; 
+	top: -50%; 
+	position: relative;
+}

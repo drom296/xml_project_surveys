@@ -1,8 +1,6 @@
 <?php
 require("Lib_survey.php");
 
-$styles = array("css/nav.css", "css/main.css");
-
 // create header tags
 $output = html_header("Choose a Survey", $styles);
 

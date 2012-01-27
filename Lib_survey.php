@@ -1,8 +1,11 @@
 <?php
 
+$styles = array("css/nav.css", "css/main.css", "css/valign.css");
+
 define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 
 define("XML_PATH", "xml/");
+define("XML_SCHEMA", "xsl/survey.xsd");
 
 define("TAKE_SURVEY_TITLE", "Choose a Survey");
 define("TAKE_SURVEY_CLASS", "noBullet");
@@ -22,6 +25,10 @@ define("EDIT_SURVEY_PAGE", "edit_survey.php");
 define("SURVEY_FIELD", "survey");
 define("SURVEY_FORM_XSLT", "xsl/survey.xslt");
 define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
+
+// TODO add suppress warning symbol
+// dom->load
+// fwrite
 
 function html_header($title = "Untitled", $styles = null, $scripts = null) {
 	$string = <<<END
@@ -51,6 +58,8 @@ END;
 	$string .= <<<END
 </head>
 <body>\n
+<div id="outterDIV">\n
+<div id="middleDIV">\n
 	<div id="page">\n
 END;
 
@@ -61,6 +70,8 @@ function html_footer($text = "") {
 	$string = <<<END
 		<p><em>$text</em></p>
 	</div> <!-- id=page -->
+</div> <!-- id=middleDIV -->
+</div> <!-- id=outterDIV -->s
 </body>
 </html>
 END;
@@ -117,18 +128,15 @@ function addNav() {
 }
 
 function addTakeSurveyLinks() {
-	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, 
-												TAKE_SURVEY_DIV_CLASS, TAKE_SURVEY_CLASS);
+	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, TAKE_SURVEY_DIV_CLASS, TAKE_SURVEY_CLASS);
 }
 
 function addDeleteSurveyLinks() {
-	return addSurveyLinks(DELETE_SURVEY_TITLE, DELETE_SURVEY_PAGE, 
-												DELETE_SURVEY_DIV_CLASS, DELETE_SURVEY_CLASS);
+	return addSurveyLinks(DELETE_SURVEY_TITLE, DELETE_SURVEY_PAGE, DELETE_SURVEY_DIV_CLASS, DELETE_SURVEY_CLASS);
 }
 
-function addEditSurveyLinks(){
-	return addSurveyLinks(EDIT_SURVEY_TITLE, EDIT_SURVEY_PAGE, 
-												EDIT_SURVEY_DIV_CLASS, EDIT_SURVEY_CLASS);
+function addEditSurveyLinks() {
+	return addSurveyLinks(EDIT_SURVEY_TITLE, EDIT_SURVEY_PAGE, EDIT_SURVEY_DIV_CLASS, EDIT_SURVEY_CLASS);
 }
 
 function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class = "") {
@@ -164,8 +172,7 @@ function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class =
 	// display each as a list item
 	foreach ($surveys as $survey) {
 		// echo "<br />".$survey."<br />";
-		$result .= "\t\t<li><a" . $page . "?" . SURVEY_FIELD . "=".$path.$survey.
-						"'>$survey</a></li>" . "\n";
+		$result .= "\t\t<li><a" . $page . "?" . SURVEY_FIELD . "=" . $path . $survey . "'>$survey</a></li>" . "\n";
 	}
 
 	// close the List
@@ -267,34 +274,94 @@ function deleteFile($fileName) {
 	return $result;
 }
 
-function editSurvey($fileName){
+function editSurvey($fileName) {
 	$result = "";
 	// create the form to display the file
-	$result .= "<form>"."\n";
-	
+	$result .= "<form>" . "\n";
+
 	$result .= "<h1>Edit Tutorial: $fileName</h1>";
-	
+
 	// load the file
 	$xmlDom = new DOMDocument();
-	$xmlDom->load($fileName);
 	
+	$xmlDom -> load($fileName);
+
 	// get it as XML
-	$xmlString = $xmlDom->saveXML()."\n";
-	
+	$xmlString = $xmlDom -> saveXML() . "\n";
+
+	// create the hidden input for the filename
+	$result .= "<input name='survey' type='hidden' value=$fileName />";
+
 	// create the textarea
-	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>".
-		htmlspecialchars($xmlString)."</textarea>";
-	
+	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
+
 	// add reset button
 	$result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
 
 	// add submit button
 	$result .= "<input type='submit' name='submit' value='submit'/>" . "\n";
-	
+
 	// create the form to display the file
-	$result .= "</form>"; 
-	
+	$result .= "</form>";
+
 	return $result;
 }
 
+function submitSurvey($fileName, $xml) {
+	$result = "";
+
+	// get rid of start-end whitespace
+	$xml = trim($xml);
+
+	// start boolean to track success
+	$success = false;
+	
+	// create container
+	$result .= startDiv("", "acknowledgeDiv");
+	$result .= "<p>";
+	
+	// check if it is valid against our schema
+	if (isValidXML($xml, XML_SCHEMA)) {
+		// overwrite the file
+		// open file
+		$file = fopen($fileName, "w") or die("Cannot open　" . $fileName);
+
+		// write only if it has data
+		if (!empty($xml)) {
+			$success = fwrite($file, $xml) > 0;
+		}
+
+		// close file
+		fclose($file);
+	}
+	
+	// check if we were able to write the file
+	if($success){
+		// build the positive acknowledgement
+		$result .= "You have successfully edited: <span>$fileName</span>";
+	} else {
+		// build the negative acknowledgement
+		$result .= "Could not edit: <span>$fileName</span>";
+	}
+	$result .= "</p>";
+
+	// close container
+	$result .= endDiv();
+
+	return $result;
+}
+
+function isValidXML($xml, $xmlSchema) {
+	$result = false;
+
+	// check if they are both files, can be read/written appropriately
+	if (is_file($xml) && is_file($xmlSchema) && is_writable($xml) && is_readable($xmlSchema)) {
+		// create a dom from the XML
+		$xmlDom = new DOMDocument();
+		$xmlDom -> load($xml);
+		$result = $xmlDom -> schemaValidate($xmlSchema);
+	}
+
+	return $result;
+}
 ?>
