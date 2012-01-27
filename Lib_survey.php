@@ -14,6 +14,11 @@ define("DELETE_SURVEY_CLASS", "noBullet");
 define("DELETE_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
 define("DELETE_SURVEY_PAGE", "delete_survey.php");
 
+define("EDIT_SURVEY_TITLE", "Choose a Survey to Edit");
+define("EDIT_SURVEY_CLASS", "noBullet");
+define("EDIT_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
+define("EDIT_SURVEY_PAGE", "edit_survey.php");
+
 define("SURVEY_FIELD", "survey");
 define("SURVEY_FORM_XSLT", "xsl/survey.xslt");
 define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
@@ -112,11 +117,18 @@ function addNav() {
 }
 
 function addTakeSurveyLinks() {
-	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, TAKE_SURVEY_DIV_CLASS, TAKE_SURVEY_CLASS);
+	return addSurveyLinks(TAKE_SURVEY_TITLE, TAKE_SURVEY_PAGE, 
+												TAKE_SURVEY_DIV_CLASS, TAKE_SURVEY_CLASS);
 }
 
 function addDeleteSurveyLinks() {
-	return addSurveyLinks(DELETE_SURVEY_TITLE, DELETE_SURVEY_PAGE, DELETE_SURVEY_DIV_CLASS, DELETE_SURVEY_CLASS);
+	return addSurveyLinks(DELETE_SURVEY_TITLE, DELETE_SURVEY_PAGE, 
+												DELETE_SURVEY_DIV_CLASS, DELETE_SURVEY_CLASS);
+}
+
+function addEditSurveyLinks(){
+	return addSurveyLinks(EDIT_SURVEY_TITLE, EDIT_SURVEY_PAGE, 
+												EDIT_SURVEY_DIV_CLASS, EDIT_SURVEY_CLASS);
 }
 
 function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class = "") {
@@ -141,7 +153,8 @@ function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class =
 	$result .= "\t<h1>$title</h1>" . "\n";
 
 	// grab all the available surveys
-	$surveys = getSurveys();
+	$path = XML_PATH;
+	$surveys = getSurveys($path);
 
 	// setup the List
 	$result .= "\t<ul" . $class . ">" . "\n";
@@ -151,9 +164,8 @@ function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class =
 	// display each as a list item
 	foreach ($surveys as $survey) {
 		// echo "<br />".$survey."<br />";
-		$result .= "\t\t<li><a" . $page . "?" . SURVEY_FIELD . "=$survey'>$survey</a></li>" . "\n";
-
-		// echo htmlspecialchars($result)."\n";
+		$result .= "\t\t<li><a" . $page . "?" . SURVEY_FIELD . "=".$path.$survey.
+						"'>$survey</a></li>" . "\n";
 	}
 
 	// close the List
@@ -184,8 +196,8 @@ function getSurveys($dir = XML_PATH) {
 	return $result;
 }
 
-function addSurveyForm($survey) {
-	return xml_transform(XML_PATH . $survey, SURVEY_FORM_XSLT, SURVEY_FORM_CLASS);
+function displaySurveyForm($survey) {
+	return xml_transform($survey, SURVEY_FORM_XSLT, SURVEY_FORM_CLASS);
 }
 
 function xml_transform($xml, $xslt, $divClass = "") {
@@ -226,7 +238,7 @@ function deleteSurvey($survey) {
 	$result = "";
 
 	// delete the file
-	$success = deleteFile(XML_PATH . $survey);
+	$success = deleteFile($survey);
 
 	// create container
 	$result .= startDiv("", "acknowledgeDiv");
@@ -254,4 +266,26 @@ function deleteFile($fileName) {
 
 	return $result;
 }
+
+function editSurvey($fileName){
+	$result = "";
+	// create the form to display the file
+	$result .= "<form>"."\n";
+	
+	$result .= "<h1>Edit Tutorial: $fileName</h1>";
+	
+	// load the file
+	$xmlDom = new DOMDocument();
+	$xmlDom->load($fileName);
+	
+	// get it as XML
+	$xmlString = $xmlDom->saveXML()."\n";
+	
+	// create the textarea
+	$result .= "<textarea name='xml' class='width70 marginCenter roundBox'>$xmlString</textarea>";
+	
+	// create the form to display the file
+	$result .= "</form>"; 
+}
+
 ?>

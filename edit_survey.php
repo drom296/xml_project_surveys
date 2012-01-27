@@ -1,17 +1,10 @@
 <?php
-require("Lib_survey.php");
-
-$survey = $_GET[SURVEY_FIELD];
-
-// check to see if a survey was passed
-if(empty($survey)){
-	header('Location: '.CHOOSE_SURVEY_PAGE);
-}
+require ("Lib_survey.php");
 
 $styles = array("css/nav.css", "css/main.css");
 
 // create header tags
-$output = html_header("$survey", $styles);
+$output = html_header("Choose a Survey", $styles);
 
 // HEADER Section *****************************************
 
@@ -32,8 +25,20 @@ $output .= endDiv("header");
 // start the content section
 $output .= startDiv("content", "roundBox");
 
-// add the survey form
-$output .= displaySurveyForm($survey);
+// test to see if a survey was passed
+if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
+	$survey = $_GET[SURVEY_FIELD];
+	// check if it was submitted
+	if(false){
+		
+	} else{ 
+		// else display the form
+		$output .= deleteSurvey($survey);
+	}
+}
+
+// create list of available to delete
+$output .= addEditSurveyLinks();
 
 // end the content section
 $output .= endDiv("content");
@@ -45,7 +50,6 @@ $output .= startDiv("footer");
 
 // end the footer section
 $output .= endDiv("footer");
-
 
 // create footer
 $output .= html_footer("");
