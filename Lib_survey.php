@@ -34,10 +34,6 @@ define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
 define("SURVEY_RESULTS_XSLT", "xsl/review_survey.xsl");
 define("SURVEY_RESULTS_CLASS", "width70 marginCenter surveyForm");
 
-// TODO add suppress warning symbol
-// dom->load
-// fwrite
-
 function html_header($title = "Untitled", $styles = null, $scripts = null) {
 	$string = <<<END
 <!DOCTYPE html>
@@ -241,12 +237,12 @@ function xml_transform($xml, $xslt, $divClass = "") {
 	// load the xml
 	$xmlDom = new DomDocument();
 	// load XML File into DOM
-	$xmlDom -> load($xml);
+	@$xmlDom -> load($xml);
 
 	// load the xslt
 	$xslDom = new DomDocument();
 	// load XSL File into DOM
-	$xslDom -> load($xslt);
+	@$xslDom -> load($xslt);
 
 	// create XSLT Processor
 	$processor = new XSLTProcessor();
@@ -306,10 +302,10 @@ function editSurvey($fileName) {
 	// load the file
 	$xmlDom = new DOMDocument();
 
-	$xmlDom -> load($fileName);
+	@$xmlDom -> load($fileName);
 
 	// get it as XML
-	$xmlString = $xmlDom -> saveXML() . "\n";
+	@$xmlString = $xmlDom -> saveXML() . "\n";
 
 	// create the hidden input for the filename
 	$result .= "<input name='survey' type='hidden' value=$fileName />";
@@ -394,8 +390,8 @@ function isValidXMLSource($xml, $xmlSchema) {
 	if (is_file($xmlSchema) && is_readable($xmlSchema)) {
 		// create a dom from the XML
 		$xmlDom = new DOMDocument();
-		$xmlDom -> loadXML($xml);
-		$result = $xmlDom -> schemaValidate($xmlSchema);
+		@$xmlDom -> loadXML($xml);
+		@$result = $xmlDom -> schemaValidate($xmlSchema);
 	}
 
 	return $result;
