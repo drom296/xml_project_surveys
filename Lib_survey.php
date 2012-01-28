@@ -22,8 +22,13 @@ define("EDIT_SURVEY_CLASS", "noBullet");
 define("EDIT_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
 define("EDIT_SURVEY_PAGE", "edit_survey.php");
 
+define("VIEW_SURVEY_TITLE", "Choose a Survey to View");
+define("VIEW_SURVEY_CLASS", "noBullet");
+define("VIEW_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
+define("VIEW_SURVEY_PAGE", "survey_results.php");
+
 define("SURVEY_FIELD", "survey");
-define("SURVEY_FORM_XSLT", "xsl/take_survey.xsl.xsl");
+define("SURVEY_FORM_XSLT", "xsl/take_survey.xsl");
 define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
 
 define("SURVEY_RESULTS_XSLT", "xsl/review_survey.xsl");
@@ -45,15 +50,15 @@ END;
 	if (is_array($styles)) {
 		foreach ($styles as $style) {
 			$ie = false;
-			if(is_array($style) && $style[0]=="ie"){
+			if (is_array($style) && $style[0] == "ie") {
 				$ie = true;
 				$string .= "<!--[if lte IE 7]>";
 				$style = $style[1];
 			}
-			
+
 			$string .= "<link type='text/css' rel='stylesheet' href='$style' />\n";
-			
-			if($ie){
+
+			if ($ie) {
 				$string .= "<![endif]-->";
 			}
 		}
@@ -151,6 +156,10 @@ function addDeleteSurveyLinks() {
 
 function addEditSurveyLinks() {
 	return addSurveyLinks(EDIT_SURVEY_TITLE, EDIT_SURVEY_PAGE, EDIT_SURVEY_DIV_CLASS, EDIT_SURVEY_CLASS);
+}
+
+function addViewSurveyResultsLinks() {
+	return addSurveyLinks(VIEW_SURVEY_TITLE, VIEW_SURVEY_PAGE, VIEW_SURVEY_DIV_CLASS, VIEW_SURVEY_CLASS);
 }
 
 function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class = "") {
@@ -301,7 +310,7 @@ function editSurvey($fileName) {
 
 	// load the file
 	$xmlDom = new DOMDocument();
-	
+
 	$xmlDom -> load($fileName);
 
 	// get it as XML
@@ -333,11 +342,11 @@ function submitSurvey($fileName, $xml) {
 
 	// start boolean to track success
 	$success = false;
-	
+
 	// create container
 	$result .= startDiv("", "acknowledgeDiv");
 	$result .= "<p>";
-	
+
 	// check if it is valid against our schema
 	if (isValidXML($xml, XML_SCHEMA)) {
 		// overwrite the file
@@ -352,9 +361,9 @@ function submitSurvey($fileName, $xml) {
 		// close file
 		fclose($file);
 	}
-	
+
 	// check if we were able to write the file
-	if($success){
+	if ($success) {
 		// build the positive acknowledgement
 		$result .= "You have successfully edited: <span>$fileName</span>";
 	} else {
