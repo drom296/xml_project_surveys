@@ -2,7 +2,7 @@
 require ("Lib_survey.php");
 
 $survey = "";
-$title = "Choose a Survey";
+$title = "Choose a Survey to Take";
 
 // check to see if a survey was passed
 if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {

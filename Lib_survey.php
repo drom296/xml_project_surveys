@@ -5,9 +5,9 @@ $styles = array("css/nav.css", "css/main.css", "css/valign.css", array("ie", "cs
 define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 
 define("XML_PATH", "xml/");
-define("XML_SCHEMA", "xsl/survey.xsd");
+define("XML_SCHEMA", "xsd/survey.xsd");
 
-define("TAKE_SURVEY_TITLE", "Choose a Survey");
+define("TAKE_SURVEY_TITLE", "Choose a Survey to Take");
 define("TAKE_SURVEY_CLASS", "noBullet");
 define("TAKE_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
 define("TAKE_SURVEY_PAGE", "take_survey.php");
@@ -90,7 +90,7 @@ function html_footer($text = "") {
 		<p><em>$text</em></p>
 	</div> <!-- id=page -->
 </div> <!-- id=middleDIV -->
-</div> <!-- id=outterDIV -->s
+</div> <!-- id=outterDIV -->
 </body>
 </html>
 END;
@@ -190,11 +190,8 @@ function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class =
 	// setup the List
 	$result .= "\t<ul" . $class . ">" . "\n";
 
-	// print_r($surveys);
-
 	// display each as a list item
 	foreach ($surveys as $survey) {
-		// echo "<br />".$survey."<br />";
 		$result .= "\t\t<li><a" . $page . "?" . SURVEY_FIELD . "=" . $path . $survey . "'>$survey</a></li>" . "\n";
 	}
 
@@ -204,8 +201,6 @@ function addSurveyLinks($title = "Surveys", $page = "", $divClass = "", $class =
 
 	// close the container div
 	$result .= "</div>" . "\n";
-
-	// echo htmlspecialchars($result)."\n";
 
 	// return
 	return $result;
@@ -334,6 +329,12 @@ function editSurvey($fileName) {
 	return $result;
 }
 
+/**
+ * Tries to submit the xml, by checking if it is valid, and writing it to the file
+ * 
+ * @param $fileName - file to write to
+ * @param $xml - XML as a string to submit
+ */
 function submitSurvey($fileName, $xml) {
 	$result = "";
 
@@ -348,7 +349,7 @@ function submitSurvey($fileName, $xml) {
 	$result .= "<p>";
 
 	// check if it is valid against our schema
-	if (isValidXML($xml, XML_SCHEMA)) {
+	if (isValidXMLSource($xml, XML_SCHEMA)) {
 		// overwrite the file
 		// open file
 		$file = fopen($fileName, "w") or die("Cannot open　" . $fileName);
@@ -378,14 +379,22 @@ function submitSurvey($fileName, $xml) {
 	return $result;
 }
 
-function isValidXML($xml, $xmlSchema) {
+/**
+ * Checks to see if the XML (passed as a string) is valid against a 
+ * schema (fileName of the schema)
+ * 
+ * @param $xml - xml in string format
+ * @param $xmlSchema - name of schema file 
+ * 
+ */
+function isValidXMLSource($xml, $xmlSchema) {
 	$result = false;
 
 	// check if they are both files, can be read/written appropriately
-	if (is_file($xml) && is_file($xmlSchema) && is_writable($xml) && is_readable($xmlSchema)) {
+	if (is_file($xmlSchema) && is_readable($xmlSchema)) {
 		// create a dom from the XML
 		$xmlDom = new DOMDocument();
-		$xmlDom -> load($xml);
+		$xmlDom -> loadXML($xml);
 		$result = $xmlDom -> schemaValidate($xmlSchema);
 	}
 
