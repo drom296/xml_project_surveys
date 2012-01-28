@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<survey name="survey1">
+  <questions>
+    <question id="1" text="Why did the chicken cross the road?">
+      <answer count="0">
+	<answer_text>To get to the other side</answer_text>
+      </answer>
+      <answer count="0">
+	<answer_text>To sleep</answer_text>
+      </answer>
+    </question>
+    <question id="2" text="Who's there?">
+      <answer count="1">
+	<answer_text>Banana</answer_text>
+      </answer>
+      <answer count="1">
+	<answer_text>Boo</answer_text>
+      </answer>
+    </question>
+  </questions>
+</survey>
