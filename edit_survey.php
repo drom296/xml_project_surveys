@@ -1,8 +1,18 @@
 <?php
 require ("Lib_survey.php");
 
+$title = "Choose a Survey";
+$haveSurvey = isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD]);
+
+$survey = "";
+
+if($haveSurvey){
+	$survey = $_GET[SURVEY_FIELD];
+	$title = "Taking Survey: $survey";
+}
+
 // create header tags
-$output = html_header("Choose a Survey", $styles);
+$output = html_header($title, $styles);
 
 // HEADER Section *****************************************
 
@@ -26,9 +36,7 @@ $output .= startDiv("content", "roundBox");
 $showLinks = true;
 
 // test to see if a survey was passed
-if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
-	$survey = $_GET[SURVEY_FIELD];
-
+if (!empty($survey)) {
 	// check if it was submitted, by checking for fileName, and xml
 	if (isset($_GET['xml']) && !empty($_GET['xml'])){
 		$output .= submitSurvey($survey, $_GET['xml']);
