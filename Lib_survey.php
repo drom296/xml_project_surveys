@@ -1,6 +1,6 @@
 <?php
 
-$styles = array("css/nav.css", "css/main.css", "css/valign.css", array("ie", "css/valign_ie7.css"));
+$styles = array("css/nav.css", "css/main.css", "css/valign.css", "css/form.css", array("ie", "css/valign_ie7.css"));
 
 define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 
@@ -308,7 +308,13 @@ function editSurvey($fileName) {
 	@$xmlString = $xmlDom -> saveXML() . "\n";
 
 	// create the hidden input for the filename
-	$result .= "<input name='survey' type='hidden' value=$fileName />";
+	$result .= "<input name='survey' type='hidden' value='$fileName' />";
+	
+	// create the label for the input
+	// $result = "<label for='fileName'>Name: </label>\n";
+	
+	// create the input for the fileName
+	$result .= "<input name='fileName' type='text' value='$fileName' /><br />\n";
 
 	// create the textarea
 	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
