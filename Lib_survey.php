@@ -23,8 +23,11 @@ define("EDIT_SURVEY_DIV_CLASS", "marginCenter surveyList textCenter");
 define("EDIT_SURVEY_PAGE", "edit_survey.php");
 
 define("SURVEY_FIELD", "survey");
-define("SURVEY_FORM_XSLT", "xsl/survey.xslt");
+define("SURVEY_FORM_XSLT", "xsl/take_survey.xsl.xsl");
 define("SURVEY_FORM_CLASS", "width70 marginCenter surveyForm");
+
+define("SURVEY_RESULTS_XSLT", "xsl/review_survey.xsl");
+define("SURVEY_RESULTS_CLASS", "width70 marginCenter surveyForm");
 
 // TODO add suppress warning symbol
 // dom->load
@@ -216,6 +219,10 @@ function getSurveys($dir = XML_PATH) {
 
 function displaySurveyForm($survey) {
 	return xml_transform($survey, SURVEY_FORM_XSLT, SURVEY_FORM_CLASS);
+}
+
+function displaySurveyResults($survey) {
+	return xml_transform($survey, SURVEY_RESULTS_XSLT, SURVEY_RESULTS_CLASS);
 }
 
 function xml_transform($xml, $xslt, $divClass = "") {

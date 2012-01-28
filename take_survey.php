@@ -1,15 +1,17 @@
 <?php
-require("Lib_survey.php");
+require ("Lib_survey.php");
 
-$survey = $_GET[SURVEY_FIELD];
+$survey = "";
+$title = "Choose a Survey";
 
 // check to see if a survey was passed
-if(empty($survey)){
-	header('Location: '.CHOOSE_SURVEY_PAGE);
+if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
+	$survey = $_GET[SURVEY_FIELD];
+	$title = "Take Survey: $survey";
 }
 
 // create header tags
-$output = html_header("$survey", $styles);
+$output = html_header($title, $styles);
 
 // HEADER Section *****************************************
 
@@ -30,9 +32,14 @@ $output .= endDiv("header");
 // start the content section
 $output .= startDiv("content", "roundBox");
 
-// add the survey form
-$output .= displaySurveyForm($survey);
-
+// one or the other
+if (empty($survey)) {
+	// create list of available to take
+	$output .= addTakeSurveyLinks();
+} else {
+	// add the survey form
+	$output .= displaySurveyForm($survey);
+}
 // end the content section
 $output .= endDiv("content");
 
@@ -43,7 +50,6 @@ $output .= startDiv("footer");
 
 // end the footer section
 $output .= endDiv("footer");
-
 
 // create footer
 $output .= html_footer("");
