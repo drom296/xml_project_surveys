@@ -38,12 +38,16 @@ $showLinks = true;
 // test to see if a survey was passed
 if (!empty($survey)) {
 	// check if it was submitted, by checking for fileName, and xml
-	if (isset($_GET['xml']) && !empty($_GET['xml'])){
-		$output .= submitSurvey($survey, $_GET['xml']);
+	if (isset($_GET['xml']) && !empty($_GET['xml'])  && 
+			isset($_GET['fileName']) && !empty($_GET['fileName'])){
+			
+		// submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite)	
+		$output .= submitSurvey($survey, XML_PATH.$_GET['fileName'].".xml", $_GET['xml'], true);
 		
 	} else {
 		// else display the form
-		$output .= editSurvey($survey);
+		// editSurveyForm($fileName, $fileToLoad);
+		$output .= addEditSurveyForm($survey, $survey);
 		$showLinks = false;
 	}
 }

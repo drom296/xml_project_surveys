@@ -292,7 +292,7 @@ function deleteFile($fileName) {
 	return $result;
 }
 
-function editSurvey($fileName) {
+function addEditSurveyForm($fileName) {
 	$result = "";
 	// create the form to display the file
 	$result .= "<form>" . "\n";
@@ -311,10 +311,10 @@ function editSurvey($fileName) {
 	$result .= "<input name='survey' type='hidden' value='$fileName' />";
 	
 	// create the label for the input
-	// $result = "<label for='fileName'>Name: </label>\n";
+	$result .= "<label for='fileName'>Name: </label>\n";
 	
-	// create the input for the fileName
-	$result .= "<input name='fileName' type='text' value='$fileName' /><br />\n";
+	// create the input for the fileName, get only the filename without the .xml
+	$result .= "<input name='fileName' type='text' value='".basename($fileName,".xml")."' /><br />\n";
 
 	// create the textarea
 	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
@@ -337,7 +337,7 @@ function editSurvey($fileName) {
  * @param $fileName - file to write to
  * @param $xml - XML as a string to submit
  */
-function submitSurvey($fileName, $xml) {
+function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 	$result = "";
 
 	// get rid of start-end whitespace
@@ -353,8 +353,13 @@ function submitSurvey($fileName, $xml) {
 	// check if it is valid against our schema
 	if (isValidXMLSource($xml, XML_SCHEMA)) {
 		// overwrite the file
+		if($overwrite && ($origSurveyName != $newSurveyName)){
+			// delete the original survey
+			deleteFile($origSurveyName);
+		}
 		// open file
-		$file = fopen($fileName, "w") or die("Cannot open　" . $fileName);
+		// TODO: suppress warning
+		$file = fopen($newSurveyName, "w") or die("Cannot open　" . $newSurveyName);
 
 		// write only if it has data
 		if (!empty($xml)) {
@@ -368,10 +373,10 @@ function submitSurvey($fileName, $xml) {
 	// check if we were able to write the file
 	if ($success) {
 		// build the positive acknowledgement
-		$result .= "You have successfully edited: <span>$fileName</span>";
+		$result .= "You have successfully edited: <span>$newSurveyName</span>";
 	} else {
 		// build the negative acknowledgement
-		$result .= "Could not edit: <span>$fileName</span>";
+		$result .= "Could not edit: <span>$newSurveyName</span>";
 	}
 	$result .= "</p>";
 

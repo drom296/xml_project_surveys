@@ -1,19 +1,17 @@
 form{
-	width: 70%;
+	width: 80%;
 	margin: auto;
 	text-align: center;
 }
 
-form textarea{
-	margin: auto;
+form *{
+	margin: 0.5%;
 }
-
 form .surveyXML{
+	margin: 0.5%;
 	height: 40em;
-	width: 100%;
+	width: 90%;
 	padding: 2%;
-/*	font-size: 1.1em;*/
-	margin-top:1.5%;
 	background-color:#660011;
 	color:#fad2aa;
 }
@@ -21,6 +19,7 @@ form input{
 	background-color:#660011;
 	border-color: #660011;
 	color: #fad2aa;
+	padding: 1%;
 }
 
 form input[type="submit"], form input[type="reset"] {
