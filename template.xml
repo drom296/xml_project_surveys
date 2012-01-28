@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<survey name="survey1">
+	<questions>
+		<question id="1" text="What is the first letter of the alphabet?">
+			<answer count="2">
+				<answer_text>A</answer_text>
+			</answer>
+			<answer count="0">
+				<answer_text>B</answer_text>
+			</answer>
+		</question>
+		<question id="2" text="What color is the sky?">
+			<answer count="1">
+				<answer_text>Blue</answer_text>
+			</answer>
+			<answer count="1">
+				<answer_text>Green</answer_text>
+			</answer>
+		</question>
+	</questions>
+</survey>

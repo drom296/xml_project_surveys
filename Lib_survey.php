@@ -6,6 +6,7 @@ define("CHOOSE_SURVEY_PAGE", "choose_survey.php");
 
 define("XML_PATH", "xml/");
 define("XML_SCHEMA", "xsd/survey.xsd");
+define("XML_TEMPLATE", "template.xml");
 
 define("TAKE_SURVEY_TITLE", "Choose a Survey to Take");
 define("TAKE_SURVEY_CLASS", "noBullet");
