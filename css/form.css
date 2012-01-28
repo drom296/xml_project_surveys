@@ -1,0 +1,29 @@
+form{
+	width: 70%;
+	margin: auto;
+	text-align: center;
+}
+
+form textarea{
+	margin: auto;
+}
+
+form .surveyXML{
+	height: 40em;
+	width: 100%;
+	padding: 2%;
+/*	font-size: 1.1em;*/
+	margin-top:1.5%;
+	background-color:#660011;
+	color:#fad2aa;
+}
+form input{
+	background-color:#660011;
+	border-color: #660011;
+	color: #fad2aa;
+}
+
+form input[type="submit"], form input[type="reset"] {
+	width: 5em;
+	margin: 1%;
+}
