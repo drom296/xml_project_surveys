@@ -2,17 +2,32 @@
  * @author tuxedo
  */
 
+var ie7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;
+
 // This should happen on $(document).ready();
 $(document).ready(function() {
 	// check to see if the form is showing
 	if($("#editSurveyForm").length > 0) {
-		alert("howdy");
-
-		// if so
-		// add the choice links
-		// add the question links
+		// add action to the delete images
+		
 	}
 });
+
+function deleteItem(which){
+	which.parentNode.removeChild(which);
+}
+
+function addChoice(where){
+	// build choice
+	var choice = "<div class='choiceDiv'>"; 
+	choice += "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
+	choice += "<input type='text' class='choiceInput' />";
+	choice += "</div>";
+	
+	// add choice before where
+	$(where).before(choice);
+}
+
 // for each question div
 // add a link to add more choices
 // create a function to facilitate.

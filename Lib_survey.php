@@ -341,8 +341,11 @@ function addEditSurveyForm($fileName) {
 		// add the question as an input
 		$result .= "<label class='questionLabel'>Question:</label>";
 		$result .= "<br />";
+		// add delete image
+		$result .= startDiv("", "questionDiv");
+		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
 		$result .= "<input type='text' class='questionInput' value='$question' />";
-		$result .= "<br />";
+		$result .= endDiv();
 
 		$result .= "<label class='choiceLabel'>Choices:</label>";
 		$result .= "<br />";
@@ -350,13 +353,15 @@ function addEditSurveyForm($fileName) {
 		foreach ($choices as $two) {
 			// add each choice
 			$result .= startDiv("", "choiceDiv");
+			// add delete image
+			$result .= "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
 			$result .= "<input type='text' class='choiceInput' value='" . $two -> nodeValue . "' />";
 			$result .= endDiv();
 		}
 
 		// Add link to add choice
-		$result .= "<button type='button'>Add a Choice</button>";
-		
+		$result .= "<button type='button' onclick='addChoice(this)'>Add a Choice</button>";
+
 		// add link to add question
 		$result .= "<button type='button'>Add a Question</button>";
 
@@ -365,7 +370,7 @@ function addEditSurveyForm($fileName) {
 	}
 
 	// add reset button
-	$result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
+	// $result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
 
 	// add submit button
 	$result .= "<input type='submit' name='submit' value='submit'/>" . "\n";
