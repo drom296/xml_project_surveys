@@ -2,6 +2,8 @@
  * @author tuxedo
  */
 
+// This should happen on $(document).ready();
+
 
 // for each question div
 	// add a link to add more choices
@@ -13,10 +15,15 @@
 		// create a function to facilitate.
 		// onclick add a question div to the end of the question div list
 		
+
+
 // --------------------------------------------
+// This should be the function that the form calls onsubmit
+
 // Processing
 // 	
 // JavaScript
+
 
 	// build the xml document based the questions and the choices as text and set
 	// to the hidden xml field
