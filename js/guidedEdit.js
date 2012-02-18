@@ -9,23 +9,70 @@ $(document).ready(function() {
 	// check to see if the form is showing
 	if($("#editSurveyForm").length > 0) {
 		// add action to the delete images
-		
+
 	}
 });
-
-function deleteItem(which){
+function deleteItem(which) {
 	which.parentNode.removeChild(which);
 }
 
-function addChoice(where){
+function addChoice(where) {
 	// build choice
-	var choice = "<div class='choiceDiv'>"; 
+	var choice = "<div class='choiceDiv'>";
 	choice += "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
 	choice += "<input type='text' class='choiceInput' />";
 	choice += "</div>";
-	
+
 	// add choice before where
 	$(where).before(choice);
+}
+
+function addQuestion() {
+	// add the question div before the submit button
+
+	var question = "";
+	// create the div for the question block
+	question += "<div class='questionBlock'>";
+
+	// add the question as an input
+	// first the label
+	question += "<label class='questionLabel'>Question:</label>";
+	question += "<br />";
+	
+	// start the question div
+	question += '<div class="questionDiv">';
+	// add the delete image
+	question += "<img class='deleteQImg' onclick='deleteItem(this.parentNode.parentNode)' src='img/DeleteRed.png' />";
+	// add the question input
+	question += "<input type='text' class='questionInput' value='Question' />";
+	// close the question div
+	question += '</div>';
+	
+	
+	// add a choice input
+	// first the label
+	question += "<label class='choiceLabel'>Choices:</label>";
+	question += "<br />";
+	// then the container
+	question += "<div class='choiceDiv'>";
+	// followed by the image delet
+	question += "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
+	// input time
+	question += "<input type='text' class='choiceInput' value='choice' />";
+	// finally we close the choice div
+	question += "</div>";
+	
+	// Add link to add choice
+	question += "<button type='button' onclick='addChoice(this)'>Add a Choice</button>";
+	
+	// add link to add question
+	question += "<button type='button' onclick='addQuestion()'>Add a Question</button>";
+	
+	
+	// end the question Div
+	question += "</div>";
+
+	$('input[type="submit"]').before(question);
 }
 
 // for each question div

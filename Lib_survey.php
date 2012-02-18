@@ -336,14 +336,14 @@ function addEditSurveyForm($fileName) {
 		$choices = $one -> getElementsByTagName("answer_text");
 
 		// create the div for the question
-		$result .= startDiv("", "questionDiv");
+		$result .= startDiv("", "questionBlock");
 
 		// add the question as an input
 		$result .= "<label class='questionLabel'>Question:</label>";
 		$result .= "<br />";
 		// add delete image
 		$result .= startDiv("", "questionDiv");
-		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
+		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode.parentNode)' src='img/DeleteRed.png' />";
 		$result .= "<input type='text' class='questionInput' value='$question' />";
 		$result .= endDiv();
 
@@ -363,7 +363,7 @@ function addEditSurveyForm($fileName) {
 		$result .= "<button type='button' onclick='addChoice(this)'>Add a Choice</button>";
 
 		// add link to add question
-		$result .= "<button type='button'>Add a Question</button>";
+		$result .= "<button type='button' onclick='addQuestion()' >Add a Question</button>";
 
 		// close the div for the question
 		$result .= endDiv();

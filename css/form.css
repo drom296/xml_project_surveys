@@ -78,7 +78,7 @@ form .choiceLabel {
 form .questionDiv, form .choiceDiv {
 	position: relative;
 }
-form .questionDiv+ .questionDiv {
+form .questionBlock+ .questionBlock {
 	margin-top: 3%;
 }
 form .deleteQImg {
