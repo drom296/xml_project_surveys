@@ -120,11 +120,7 @@ function buildXML() {
 
 			//for each choice
 			// create the choice node
-			result += '<answer count="0">';
-			result += '<answer_text>' + choice + '</answer_text>'
-
-			// create the choice node
-			result += '</answer>';
+			result += '<answer count="0" text="'+choice+'" />';
 		}
 
 		// close the question
