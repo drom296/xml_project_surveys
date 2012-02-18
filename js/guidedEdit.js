@@ -13,10 +13,6 @@
 		// create a function to facilitate.
 		// onclick add a question div to the end of the question div list
 		
-
-
-
-
 // --------------------------------------------
 // Processing
 // 	
