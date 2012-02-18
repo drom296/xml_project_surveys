@@ -10,6 +10,9 @@ if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
 	$title = "Take Survey: $survey";
 }
 
+// TODO: process the results of the form
+	//We should be incremthing the counter
+
 // create header tags
 $output = html_header($title, $styles);
 

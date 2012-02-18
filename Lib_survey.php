@@ -306,7 +306,7 @@ function addEditSurveyForm($fileName) {
 	@$xmlDom -> load($fileName);
 
 	// get it as XML
-	@$xmlString = $xmlDom -> saveXML() . "\n";
+	// @$xmlString = $xmlDom -> saveXML() . "\n";
 
 	// create the hidden input for the filename
 	$result .= "<input name='survey' type='hidden' value='$fileName' />";
@@ -318,7 +318,38 @@ function addEditSurveyForm($fileName) {
 	$result .= "<input name='fileName' type='text' value='".basename($fileName,".xml")."' /><br />\n";
 
 	// create the textarea
-	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
+	// $result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
+
+	// TODO: start coding for pseudo code
+	
+	// grab the questions
+	$questions = $xmlDom->getElementsByTagName("question");
+
+
+	// loop thru the questions
+	foreach($questions as $one){
+		// grab the question
+		// TODO: figure the correct method for getting the attribute
+		$question = $one.getAttribute("text");
+	
+		// grab the choices
+		$choices = $one.getElementsByTagName("answer_text");
+		
+		// create the div for the question
+		$result .= startDiv("","questionDiv");
+		
+		// add the question as an input
+		$result .= "<input type='text' value='$question' />";
+		
+		// loop through the choices
+		foreach($choices as $two){
+			// add each choice
+			$result .= "<input type='text' value='$two' />";
+		}
+			
+		// close the div for the question
+		$result .= endDiv();
+	}
 
 	// add reset button
 	$result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
