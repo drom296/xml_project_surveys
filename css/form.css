@@ -26,3 +26,25 @@ form input[type="submit"], form input[type="reset"] {
 	width: 5em;
 	margin: 1%;
 }
+
+form p {
+	margin-left:30%;
+	text-align:left;
+	font-weight: bold;
+}
+
+form ul+p {
+	margin-top: 2.5%;
+}
+
+form ul{
+	list-style-type:none;
+	text-align: left;
+}
+
+form li{
+/*	margin:auto;*/
+/*	width: 50%;*/
+	margin-left:35%;
+/*	text-align:left;*/
+}
