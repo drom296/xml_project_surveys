@@ -118,6 +118,8 @@ function buildXML() {
 		for( j = 0, len2 = choices.length; j < len2; j++) {
 			var choice = choices.item(j).value;
 
+			console.log(choice);
+
 			//for each choice
 			// create the choice node
 			result += '<answer count="0" text="'+choice+'" />';
@@ -131,6 +133,9 @@ function buildXML() {
 	result += '</questions>';
 	// close the root node : <survey name="survey1">
 	result += '</survey>';
+	
+	console.log("result:");
+	console.log(result);
 
 	// change the xml DOM to a string and set equal to the hidden xml field
 	var xml = document.getElementById('xml');

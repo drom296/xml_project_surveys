@@ -329,11 +329,10 @@ function addEditSurveyForm($fileName) {
 	// loop thru the questions
 	foreach ($questions as $one) {
 		// grab the question
-		// TODO: figure the correct method for getting the attribute
 		$question = $one -> getAttribute("text");
 
 		// grab the choices
-		$choices = $one -> getElementsByTagName("answer_text");
+		$choices = $one -> getElementsByTagName("answer");
 
 		// create the div for the question
 		$result .= startDiv("", "questionBlock");
@@ -351,11 +350,12 @@ function addEditSurveyForm($fileName) {
 		$result .= "<br />";
 		// loop through the choices
 		foreach ($choices as $two) {
+			$two = $two -> getAttribute("text");
 			// add each choice
 			$result .= startDiv("", "choiceDiv");
 			// add delete image
 			$result .= "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
-			$result .= "<input type='text' class='choiceInput' value='" . $two -> nodeValue . "' />";
+			$result .= "<input type='text' class='choiceInput' value='" . $two . "' />";
 			$result .= endDiv();
 		}
 

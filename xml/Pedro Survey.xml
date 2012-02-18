@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<survey name="Pedro Survey">
-	<questions>
-		<question id="0" text="What's the timeline on the project?">
-			<answer count="0" text="ahead-of time" />
-			<answer count="0" text="on-time" />
-			<answer count="0" text="late" />
-			<answer count="0" text="don't care" />
-		</question>
-		<question id="1" text="What's the purpose of all this?">
-			<answer count="0" text="good grade" />
-			<answer count="0" text="42" />
-			<answer count="0" text="play with xml" />
-		</question>
-	</questions>
-</survey>
+<?xml version="1.0" encoding="utf-8"?><survey name="Pedro Survey"><questions><question id="0" text="What"><answer count="0" text="ahead-of time" /><answer count="0" text="on-time" /><answer count="0" text="late" /><answer count="0" text="done" /></question><question id="1" text="What"><answer count="0" text="good grade" /><answer count="0" text="42" /><answer count="0" text="play with xml" /></question></questions></survey>

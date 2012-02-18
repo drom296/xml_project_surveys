@@ -10,8 +10,19 @@ if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
 	$title = "Take Survey: $survey";
 }
 
+var_dump($_GET);
+
 // TODO: process the results of the form
-	//We should be incremthing the counter
+//We should be incremthing the counter
+	
+// then route to the view results page
+// parse through the xml
+
+// grab all the questions whose id we have
+// for each question
+	// look for the answer with the matching text
+	// update the count
+
 
 // create header tags
 $output = html_header($title, $styles);
