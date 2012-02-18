@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<survey name="survey1">
-	<questions>
-		<question id="0" text="What is the first letter of the alphabet?">
-			<answer count="0" text="A" />
-			<answer count="0" text="B" />
-		</question>
-		<question id="1" text="What color is the sky?">
-			<answer count="0" text="Blue" />
-			<answer count="0" text="Green" />
-		</question>
-	</questions>
-</survey>
+<?xml version="1.0" encoding="utf-8"?><survey name="survey1"><questions><question id="0" text="What is the first letter of the alphabet?"><answer count="0" text="A" /><answer count="0" text="B" /></question><question id="1" text="What color is the sky?"><answer count="0" text="Blue" /><answer count="0" text="Green" /></question></questions></survey>

@@ -343,7 +343,7 @@ function addEditSurveyForm($fileName) {
 		// add delete image
 		$result .= startDiv("", "questionDiv");
 		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode.parentNode)' src='img/DeleteRed.png' />";
-		$result .= "<input type='text' class='questionInput' value='$question' />";
+		$result .= '<input type="text" class="questionInput" value="'.$question.'" />';
 		$result .= endDiv();
 
 		$result .= "<label class='choiceLabel'>Choices:</label>";
