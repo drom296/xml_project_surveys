@@ -15,7 +15,7 @@ form .surveyXML{
 	background-color:#660011;
 	color:#fad2aa;
 }
-form input{
+form input, button{
 	background-color:#660011;
 	border-color: #660011;
 	color: #fad2aa;
@@ -25,6 +25,15 @@ form input{
 form input[type="submit"], form input[type="reset"] {
 	width: 5em;
 	margin: 1%;
+	font-weight: bold;
+}
+
+button{
+	font-weight: bold;
+	border-width: 2px;
+/*	border-color: #660011;*/
+/*	background-color: #fad2aa;*/
+/*	color:  #660011;*/
 }
 
 form p, .surveyForm p {

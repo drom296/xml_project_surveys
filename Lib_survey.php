@@ -296,7 +296,7 @@ function deleteFile($fileName) {
 function addEditSurveyForm($fileName) {
 	$result = "";
 	// create the form to display the file
-	$result .= "<form onsubmit='return buildXML()'>" . "\n";
+	$result .= "<form id='editSurveyForm' onsubmit='return buildXML()'>" . "\n";
 
 	$result .= "<h1>Edit Tutorial: $fileName</h1>";
 
@@ -349,9 +349,16 @@ function addEditSurveyForm($fileName) {
 		// loop through the choices
 		foreach ($choices as $two) {
 			// add each choice
+			$result .= startDiv("", "choiceDiv");
 			$result .= "<input type='text' class='choiceInput' value='" . $two -> nodeValue . "' />";
-			$result .= "<br />";
+			$result .= endDiv();
 		}
+
+		// Add link to add choice
+		$result .= "<button type='button'>Add a Choice</button>";
+		
+		// add link to add question
+		$result .= "<button type='button'>Add a Question</button>";
 
 		// close the div for the question
 		$result .= endDiv();

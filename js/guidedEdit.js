@@ -3,7 +3,16 @@
  */
 
 // This should happen on $(document).ready();
+$(document).ready(function() {
+	// check to see if the form is showing
+	if($("#editSurveyForm").length > 0) {
+		alert("howdy");
 
+		// if so
+		// add the choice links
+		// add the question links
+	}
+});
 // for each question div
 // add a link to add more choices
 // create a function to facilitate.
@@ -46,21 +55,20 @@ function buildXML() {
 
 		// grab the question
 		var question = one.getElementsByClassName('questionInput')[0].value;
-		
+
 		// build the question
-		result += '<question id="'+i+'" text="' + question + '">';
+		result += '<question id="' + i + '" text="' + question + '">';
 
 		// grab all the choices within this div
 		var choices = one.getElementsByClassName('choiceInput');
 		for( j = 0, len2 = choices.length; j < len2; j++) {
 			var choice = choices.item(j).value;
-			
+
 			//for each choice
 			// create the choice node
 			result += '<answer count="0">';
-			
-			result += '<answer_text>'+choice+'</answer_text>'
-			
+			result += '<answer_text>' + choice + '</answer_text>'
+
 			// create the choice node
 			result += '</answer>';
 		}
