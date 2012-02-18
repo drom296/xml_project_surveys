@@ -37,8 +37,13 @@ if (empty($survey)) {
 	// create list of available surveys to take
 	$output .= addViewSurveyResultsLinks();
 } else {
+	// create a container to the results for styling
+	$output .= startDiv("results", "roundBox");
+	
 	// show the Results of the survey
 	$output .= displaySurveyResults($survey);
+	
+	$output .= endDiv("results");
 }
 // end the content section
 $output .= endDiv("content");

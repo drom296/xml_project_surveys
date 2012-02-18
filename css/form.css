@@ -27,22 +27,23 @@ form input[type="submit"], form input[type="reset"] {
 	margin: 1%;
 }
 
-form p {
+form p, .surveyForm p {
 	margin-left:30%;
 	text-align:left;
 	font-weight: bold;
 }
 
-form ul+p {
+form ul+p, .surveyForm ul+p {
 	margin-top: 2.5%;
 }
 
-form ul{
+form ul, .surveyForm ul{
 	list-style-type:none;
 	text-align: left;
+	margin-left:35%;
 }
 
-form li{
+form li, , .surveyForm li{
 /*	margin:auto;*/
 /*	width: 50%;*/
 	margin-left:35%;

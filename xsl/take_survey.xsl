@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:template match="/">
-    <html>
-      <body>
+<!--     <html> -->
+<!--       <body> -->
 	<xsl:for-each select="survey">
 	  <h1><xsl:value-of select="@name"/></h1>
 	  <!-- left the data for the form field blank so you can fill it in -->
@@ -29,7 +29,7 @@
 	    <input type="submit"/>
 	  </form>
 	</xsl:for-each>
-      </body>
-    </html>
+<!--       </body> -->
+<!--     </html> -->
   </xsl:template>
 </xsl:stylesheet>

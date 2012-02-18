@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:template match="/">
-    <html>
-      <body>
+<!--     <html> -->
+<!--       <body> -->
 	<h1>Survey Results</h1>
 	<xsl:for-each select="survey">
 	  <h2><xsl:value-of select="@name"/></h2>
@@ -16,7 +16,7 @@
 	    </ul>
 	  </xsl:for-each>
 	</xsl:for-each>
-      </body>
-    </html>
+<!--       </body> -->
+<!--     </html> -->
   </xsl:template>
 </xsl:stylesheet>
