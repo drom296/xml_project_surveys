@@ -296,7 +296,7 @@ function deleteFile($fileName) {
 function addEditSurveyForm($fileName) {
 	$result = "";
 	// create the form to display the file
-	$result .= "<form>" . "\n";
+	$result .= "<form onsubmit='return buildXML()'>" . "\n";
 
 	$result .= "<h1>Edit Tutorial: $fileName</h1>";
 
@@ -306,7 +306,7 @@ function addEditSurveyForm($fileName) {
 	@$xmlDom -> load($fileName);
 
 	// get it as XML
-	// @$xmlString = $xmlDom -> saveXML() . "\n";
+	@$xmlString = $xmlDom -> saveXML() . "\n";
 
 	// create the hidden input for the filename
 	$result .= "<input name='survey' type='hidden' value='$fileName' />";
@@ -319,6 +319,7 @@ function addEditSurveyForm($fileName) {
 
 	// create the textarea
 	// $result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
+	$result .= "<input name='xml' id='xml' type='hidden' value='" . htmlspecialchars($xmlString) . "'/>";
 
 	// TODO: start coding for pseudo code
 
@@ -347,8 +348,6 @@ function addEditSurveyForm($fileName) {
 		$result .= "<br />";
 		// loop through the choices
 		foreach ($choices as $two) {
-			var_dump($two);
-
 			// add each choice
 			$result .= "<input type='text' class='choiceInput' value='" . $two -> nodeValue . "' />";
 			$result .= "<br />";
