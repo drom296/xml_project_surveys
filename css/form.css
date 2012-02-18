@@ -49,3 +49,27 @@ form li, , .surveyForm li{
 	margin-left:35%;
 /*	text-align:left;*/
 }
+
+form .questionInput{
+	width: 90%;
+	margin-left: 10%;
+	text-align:left;
+}
+
+form .choiceInput{
+	width: 85%;
+	margin-left: 15%;
+}
+
+form .questionLabel{
+	margin-left: -70%;
+	
+}
+
+form .choiceLabel{
+	margin-left: -60%;
+}
+
+form .questionDiv+.questionDiv{
+	margin-top: 3%;
+}

@@ -310,43 +310,50 @@ function addEditSurveyForm($fileName) {
 
 	// create the hidden input for the filename
 	$result .= "<input name='survey' type='hidden' value='$fileName' />";
-	
+
 	// create the label for the input
 	$result .= "<label for='fileName'>Name: </label>\n";
-	
+
 	// create the input for the fileName, get only the filename without the .xml
-	$result .= "<input name='fileName' type='text' value='".basename($fileName,".xml")."' /><br />\n";
+	$result .= "<input name='fileName' type='text' value='" . basename($fileName, ".xml") . "' /><br />\n";
 
 	// create the textarea
 	// $result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
 
 	// TODO: start coding for pseudo code
-	
-	// grab the questions
-	$questions = $xmlDom->getElementsByTagName("question");
 
+	// grab the questions
+	$questions = $xmlDom -> getElementsByTagName("question");
 
 	// loop thru the questions
-	foreach($questions as $one){
+	foreach ($questions as $one) {
 		// grab the question
 		// TODO: figure the correct method for getting the attribute
-		$question = $one.getAttribute("text");
-	
+		$question = $one -> getAttribute("text");
+
 		// grab the choices
-		$choices = $one.getElementsByTagName("answer_text");
-		
+		$choices = $one -> getElementsByTagName("answer_text");
+
 		// create the div for the question
-		$result .= startDiv("","questionDiv");
-		
+		$result .= startDiv("", "questionDiv");
+
 		// add the question as an input
-		$result .= "<input type='text' value='$question' />";
-		
+		$result .= "<label class='questionLabel'>Question:</label>";
+		$result .= "<br />";
+		$result .= "<input type='text' class='questionInput' value='$question' />";
+		$result .= "<br />";
+
+		$result .= "<label class='choiceLabel'>Choices:</label>";
+		$result .= "<br />";
 		// loop through the choices
-		foreach($choices as $two){
+		foreach ($choices as $two) {
+			var_dump($two);
+
 			// add each choice
-			$result .= "<input type='text' value='$two' />";
+			$result .= "<input type='text' class='choiceInput' value='" . $two -> nodeValue . "' />";
+			$result .= "<br />";
 		}
-			
+
 		// close the div for the question
 		$result .= endDiv();
 	}
@@ -365,7 +372,7 @@ function addEditSurveyForm($fileName) {
 
 /**
  * Tries to submit the xml, by checking if it is valid, and writing it to the file
- * 
+ *
  * @param $fileName - file to write to
  * @param $xml - XML as a string to submit
  */
@@ -385,7 +392,7 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 	// check if it is valid against our schema
 	if (isValidXMLSource($xml, XML_SCHEMA)) {
 		// overwrite the file
-		if($overwrite && ($origSurveyName != $newSurveyName)){
+		if ($overwrite && ($origSurveyName != $newSurveyName)) {
 			// delete the original survey
 			deleteFile($origSurveyName);
 		}
@@ -419,12 +426,12 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 }
 
 /**
- * Checks to see if the XML (passed as a string) is valid against a 
+ * Checks to see if the XML (passed as a string) is valid against a
  * schema (fileName of the schema)
- * 
+ *
  * @param $xml - xml in string format
- * @param $xmlSchema - name of schema file 
- * 
+ * @param $xmlSchema - name of schema file
+ *
  */
 function isValidXMLSource($xml, $xmlSchema) {
 	$result = false;
