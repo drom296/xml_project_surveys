@@ -11,8 +11,11 @@ if($haveSurvey){
 	$title = "Taking Survey: $survey";
 }
 
+// TODO: Add JQuery link|
+$scripts = array("js/guidedEdit.js");
+
 // create header tags
-$output = html_header($title, $styles);
+$output = html_header($title, $styles, $scripts);
 
 // HEADER Section *****************************************
 
