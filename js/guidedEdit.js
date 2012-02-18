@@ -4,14 +4,6 @@
 
 var ie7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;
 
-// This should happen on $(document).ready();
-$(document).ready(function() {
-	// check to see if the form is showing
-	if($("#editSurveyForm").length > 0) {
-		// add action to the delete images
-
-	}
-});
 function deleteItem(which) {
 	which.parentNode.removeChild(which);
 }
@@ -108,16 +100,16 @@ function buildXML() {
 	result += '<questions>';
 
 	// grab all the question divs
-	var qDivs = document.getElementsByClassName("questionDiv");
+	var qDivs = document.getElementsByClassName("questionBlock");
 
 	// for each question div
 	for( i = 0, len = qDivs.length; i < len; i++) {
 		// build the question node
 		var one = qDivs.item(i);
-
+		
 		// grab the question
 		var question = one.getElementsByClassName('questionInput')[0].value;
-
+		
 		// build the question
 		result += '<question id="' + i + '" text="' + question + '">';
 
