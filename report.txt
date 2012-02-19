@@ -1,0 +1,24 @@
+The intent of this project was to create a robust online survey system. There 
+would be two sides. One side was to allow users to take surveys and maybe even 
+view the results of the surveys. The other side would be the administrative side.
+
+From the administrative side, we allow them to add, edit, and delete surveys. 
+We provide a dynamic way of editing/adding a survey, by allowing them to enter 
+as many questions or choices for a survey.
+
+The initial version of the website accomplished this by allowing the user to 
+edit the xml directly. This was done so that we could focus on getting the XML 
+technologies working harmoniously. Here we accomplished parsing of the xml files
+via XPATH expressions, XSL Transformations, and XSD Schema validation. 
+
+On the second phase of the project, we focused on user experience and moved away 
+from direct XML. Instead we built a dynamic form that guided the user in 
+building their survey. Once submitted, we re-build the xml, validate it, and add 
+it to our pool of surveys.
+
+We wanted to integrate AJAX into our website design, but the only place that 
+made sense to add it was when adding/editing a survey. We were planning to show 
+the incremental version of the XML document, as they were using the form to 
+build it. This was scrapped when it was decided that the user wouldn’t care.
+
+All in all, the project went well. 
