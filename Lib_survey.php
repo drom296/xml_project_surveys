@@ -298,7 +298,7 @@ function addEditSurveyForm($fileName) {
 	// create the form to display the file
 	$result .= "<form id='editSurveyForm' onsubmit='return buildXML()'>" . "\n";
 
-	$result .= "<h1>Edit Tutorial: $fileName</h1>";
+	$result .= "<h1>Edit Survey: $fileName</h1>";
 
 	// load the file
 	$xmlDom = new DOMDocument();
