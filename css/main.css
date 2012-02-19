@@ -48,7 +48,8 @@ p{
 }
 body {
 	background-color: #776655;
-	color: #555544;
+	/*color: #555544;*/
+	color: #660011;
 	background-image: url(../img/serenity.jpg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -56,7 +57,7 @@ body {
 	background-size: cover;
 }
 a{
-	color: #660011;
+	color: #660000;
 }
 #page {
 	min-width: 600px;
