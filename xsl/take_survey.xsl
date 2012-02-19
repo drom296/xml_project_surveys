@@ -10,11 +10,14 @@
 			</h1>
 			<!-- left the data for the form field blank so you can fill it in -->
 			<form>
-				<input type="hidden">
+				<input type="hidden" name="survey">
 					<xsl:attribute name="value">
 						<xsl:value-of select="@name"/>
 					</xsl:attribute>
 				</input>
+				
+				<input type="hidden" name="showResults" value="true" />
+				
 				<xsl:for-each select="questions/question">
 					<p>
 						<xsl:value-of select="@text"/>
