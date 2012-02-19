@@ -31,7 +31,7 @@ $report = file_get_contents("report.txt");
 // start the content section
 $output .= startDiv("", "marginCenter width70 roundBox");
 
-$output .= "<p class='reportLabel'>A report on design and implementation considerations, system architecture, and design choices for the 
+$output .= "<p class='reportLabel'>A report on design and implementation considerations, system architecture, <br />and design choices for the 
 final XML project</p>";
 // add to the output
 $output .= "<pre class='report'>$report</pre>";
