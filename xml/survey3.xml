@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<survey name="survey1">
+<?xml version="1.0" encoding="utf-8"?>
+<survey name="survey3">
 	<questions>
 		<question id="1" text="Why did the chicken cross the road?">
-			<answer count="0" text="To get to the other side" />
-			<answer count="0" text="To sleep" />
+			<answer count="0" text="To get to the other side"/>
+			<answer count="2" text="To sleep"/>
 		</question>
 		<question id="2" text="Who's there?">
-			<answer count="1" text="Banana" />
-			<answer count="1" text="Boo" />
+			<answer count="3" text="Banana"/>
+			<answer count="1" text="Boo"/>
 		</question>
 	</questions>
 </survey>

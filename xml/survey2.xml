@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<survey name="survey1">
+<?xml version="1.0" encoding="utf-8"?>
+<survey name="survey2">
 	<questions>
 		<question id="1" text="What is your name?">
-			<answer count="1" text="Arthur" />
-			<answer count="0" text="Someone Else" />
+			<answer count="2" text="Arthur"/>
+			<answer count="0" text="Someone Else"/>
 		</question>
 		<question id="2" text="What is your quest?">
-			<answer count="1" text="To seek the holy grail" />
-			<answer count="0" text="Something else" />
+			<answer count="2" text="To seek the holy grail"/>
+			<answer count="0" text="Something else"/>
 		</question>
 		<question id="3" text="What is the air speed velocity of an unladen swallow?">
-			<answer count="1" text="African or European?" />
-			<answer count="0" text="18 ft/s" />
+			<answer count="1" text="African or European?"/>
+			<answer count="1" text="18 ft/s"/>
 		</question>
 	</questions>
 </survey>

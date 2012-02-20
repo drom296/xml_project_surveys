@@ -41,7 +41,7 @@ if (empty($survey)) {
 	$output .= displaySurveyResults($survey);
 	
 	// add link to take survey
-	$output .= "<div class='marginCenter textCenter'><a href='take_survey.php' >Take another Survey?</a></div>";
+	$output .= "<div class='marginCenter textCenter'>\n<a href='take_survey.php' >Take another Survey?</a>\n</div>\n";
 }
 
 

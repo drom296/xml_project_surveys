@@ -32,10 +32,15 @@ $report = file_get_contents("report.txt");
 $output .= startDiv("", "marginCenter width70 roundBox");
 
 $output .= "<p class='reportLabel'>A report on design and implementation considerations, system architecture, <br />and design choices for the 
-final XML project</p>";
+final XML project</p>\n";
 // add to the output
-$output .= "<pre class='report'>$report</pre>";
+$output .= "<pre class='report'>$report</pre>\n";
 $output .= endDiv("");
+
+// add link to take survey
+$output .= "<div class='marginCenter textCenter'>\n<a href='xml/' >XML</a>\n</div>\n";
+$output .= "<div class='marginCenter textCenter'>\n<a href='xsd/' >XSD</a>\n</div>";
+$output .= "<div class='marginCenter textCenter'>\n<a href='xsl/' >XSL</a>\n</div>\n";
 
 // end the content section
 $output .= endDiv("content");

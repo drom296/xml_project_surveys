@@ -275,7 +275,7 @@ function deleteSurvey($survey) {
 	} else {
 		$result .= "Could not delete: <span>$survey</span>";
 	}
-	$result .= "</p>";
+	$result .= "</p>\n";
 
 	// close container
 	$result .= endDiv();
@@ -298,7 +298,7 @@ function addEditSurveyForm($fileName) {
 	// create the form to display the file
 	$result .= "<form id='editSurveyForm' onsubmit='return buildXML()'>" . "\n";
 
-	$result .= "<h1>Edit Survey: $fileName</h1>";
+	$result .= "<h1>Edit Survey: ".basename($fileName)."</h1>\n";
 
 	// load the file
 	$xmlDom = new DOMDocument();
@@ -309,7 +309,7 @@ function addEditSurveyForm($fileName) {
 	@$xmlString = $xmlDom -> saveXML() . "\n";
 
 	// create the hidden input for the filename
-	$result .= "<input name='survey' type='hidden' value='$fileName' />";
+	$result .= "<input name='survey' type='hidden' value='$fileName' />\n";
 
 	// create the label for the input
 	$result .= "<label for='fileName'>Name: </label>\n";
@@ -319,7 +319,7 @@ function addEditSurveyForm($fileName) {
 
 	// create the textarea
 	// $result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
-	$result .= "<input name='xml' id='xml' type='hidden' value='" . htmlspecialchars($xmlString) . "'/>";
+	$result .= "<input name='xml' id='xml' type='hidden' value='" . htmlspecialchars($xmlString) . "'/>\n";
 
 	// TODO: start coding for pseudo code
 
@@ -338,32 +338,33 @@ function addEditSurveyForm($fileName) {
 		$result .= startDiv("", "questionBlock");
 
 		// add the question as an input
-		$result .= "<label class='questionLabel'>Question:</label>";
-		$result .= "<br />";
+		$result .= "<label class='questionLabel'>Question:</label>\n";
+		$result .= "<br />\n";
 		// add delete image
 		$result .= startDiv("", "questionDiv");
-		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode.parentNode)' src='img/DeleteRed.png' />";
-		$result .= '<input type="text" class="questionInput" value="'.$question.'" />';
+		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode.parentNode)' src='img/DeleteRed.png' />\n";
+		$result .= '<input type="text" class="questionInput" value="'.$question.'" />'."\n";
 		$result .= endDiv();
 
-		$result .= "<label class='choiceLabel'>Choices:</label>";
-		$result .= "<br />";
+		$result .= "<label class='choiceLabel'>Choices:</label>\n";
+		$result .= "<br />\n";
 		// loop through the choices
 		foreach ($choices as $two) {
 			$two = $two -> getAttribute("text");
 			// add each choice
 			$result .= startDiv("", "choiceDiv");
 			// add delete image
-			$result .= "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />";
-			$result .= "<input type='text' class='choiceInput' value='" . $two . "' />";
+			$result .= "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />\n";
+			// add input
+			$result .= '<input type="text" class="choiceInput" value="' . $two . '""/>'."\n";
 			$result .= endDiv();
 		}
 
 		// Add link to add choice
-		$result .= "<button type='button' onclick='addChoice(this)'>Add a Choice</button>";
+		$result .= "<button type='button' onclick='addChoice(this)'>Add a Choice</button>\n";
 
 		// add link to add question
-		$result .= "<button type='button' onclick='addQuestion()' >Add a Question</button>";
+		$result .= "<button type='button' onclick='addQuestion()' >Add a Question</button>\n";
 
 		// close the div for the question
 		$result .= endDiv();
@@ -376,7 +377,7 @@ function addEditSurveyForm($fileName) {
 	$result .= "<input type='submit' name='submit' value='submit'/>" . "\n";
 
 	// create the form to display the file
-	$result .= "</form>";
+	$result .= "</form>\n";
 
 	return $result;
 }
@@ -398,7 +399,7 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 
 	// create container
 	$result .= startDiv("", "acknowledgeDiv");
-	$result .= "<p>";
+	$result .= "<p>\n";
 
 	// check if it is valid against our schema
 	if (isValidXMLSource($xml, XML_SCHEMA)) {
@@ -428,7 +429,7 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 		// build the negative acknowledgement
 		$result .= "Could not edit: <span>$newSurveyName</span>";
 	}
-	$result .= "</p>";
+	$result .= "</p>\n";
 
 	// close container
 	$result .= endDiv();
