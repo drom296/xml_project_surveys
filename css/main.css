@@ -23,6 +23,7 @@
 .width70{
 	width:70%;
 }
+
 .textCenter{
 	text-align: center;
 }
@@ -47,12 +48,16 @@ p{
 }
 body {
 	background-color: #776655;
-	color: #555544;
+	/*color: #555544;*/
+	color: #660011;
 	background-image: url(../img/serenity.jpg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-color: rgba(0,0,0,0.8);
 	background-size: cover;
+}
+a{
+	color: #660000;
 }
 #page {
 	min-width: 600px;
@@ -80,4 +85,14 @@ body {
 #content h1{
 	text-align: center;
 	border-bottom: 5px solid #660011;
+}
+
+.reportLabel{
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 5px solid #601;
+}
+.report{
+	font-weight:400;
+	line-height:1.5em;
 }

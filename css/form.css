@@ -1,28 +1,93 @@
-form{
+form {
 	width: 80%;
 	margin: auto;
 	text-align: center;
 }
-
-form *{
+form * {
 	margin: 0.5%;
 }
-form .surveyXML{
+form .surveyXML {
 	margin: 0.5%;
 	height: 40em;
 	width: 90%;
 	padding: 2%;
-	background-color:#660011;
-	color:#fad2aa;
+	background-color: #660011;
+	color: #fad2aa;
 }
-form input{
-	background-color:#660011;
+form input, button {
+	background-color: #660011;
 	border-color: #660011;
 	color: #fad2aa;
 	padding: 1%;
 }
-
 form input[type="submit"], form input[type="reset"] {
 	width: 5em;
 	margin: 1%;
+}
+
+form input[type="submit"], form input[type="reset"], button {
+	font-weight: bold;
+	border-width: 2px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+	
+	-moz-box-shadow: 0px .1px 10px .1px #fad2aa;
+	-webkit-box-shadow: 0px .1px 10px .1px #fad2aa;
+	box-shadow: 0px .1px 10px .1px #fad2aa;
+}
+
+form button+button{
+	margin-left: 2%;
+}
+
+form p, .surveyForm p {
+	margin-left: 30%;
+	text-align: left;
+	font-weight: bold;
+}
+form ul+ p, .surveyForm ul+ p {
+	margin-top: 2.5%;
+}
+form ul, .surveyForm ul {
+	list-style-type: none;
+	text-align: left;
+	margin-left: 35%;
+}
+form li,   , .surveyForm li {
+	/*	margin:auto;*/
+	/*	width: 50%;*/
+	margin-left: 35%;
+	/*	text-align:left;*/
+}
+form .questionInput {
+	width: 90%;
+	margin-left: 10%;
+	text-align: left;
+}
+form .choiceInput {
+	width: 85%;
+	margin-left: 15%;
+}
+form .questionLabel {
+	margin-left: -70%;
+}
+form .choiceLabel {
+	margin-left: -60%;
+}
+form .questionDiv, form .choiceDiv {
+	position: relative;
+}
+form .questionBlock+ .questionBlock {
+	margin-top: 3%;
+}
+form .deleteQImg {
+	position: absolute;
+	left: 6%;
+	top: 14%;
+}
+form .deleteCImg {
+	position: absolute;
+	left: 11%;
+	top: 25%;
 }

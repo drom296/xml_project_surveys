@@ -275,7 +275,7 @@ function deleteSurvey($survey) {
 	} else {
 		$result .= "Could not delete: <span>$survey</span>";
 	}
-	$result .= "</p>";
+	$result .= "</p>\n";
 
 	// close container
 	$result .= endDiv();
@@ -296,9 +296,9 @@ function deleteFile($fileName) {
 function addEditSurveyForm($fileName) {
 	$result = "";
 	// create the form to display the file
-	$result .= "<form>" . "\n";
+	$result .= "<form id='editSurveyForm' onsubmit='return buildXML()'>" . "\n";
 
-	$result .= "<h1>Edit Tutorial: $fileName</h1>";
+	$result .= "<h1>Edit Survey: ".basename($fileName)."</h1>\n";
 
 	// load the file
 	$xmlDom = new DOMDocument();
@@ -309,32 +309,82 @@ function addEditSurveyForm($fileName) {
 	@$xmlString = $xmlDom -> saveXML() . "\n";
 
 	// create the hidden input for the filename
-	$result .= "<input name='survey' type='hidden' value='$fileName' />";
-	
+	$result .= "<input name='survey' type='hidden' value='$fileName' />\n";
+
 	// create the label for the input
 	$result .= "<label for='fileName'>Name: </label>\n";
-	
+
 	// create the input for the fileName, get only the filename without the .xml
-	$result .= "<input name='fileName' type='text' value='".basename($fileName,".xml")."' /><br />\n";
+	$result .= "<input name='fileName' type='text' value='" . basename($fileName, ".xml") . "' /><br />\n";
 
 	// create the textarea
-	$result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
+	// $result .= "<textarea name='xml' class='marginCenter roundBox surveyXML'>" . htmlspecialchars($xmlString) . "</textarea>";
+	$result .= "<input name='xml' id='xml' type='hidden' value='" . htmlspecialchars($xmlString) . "'/>\n";
+
+	// TODO: start coding for pseudo code
+
+	// grab the questions
+	$questions = $xmlDom -> getElementsByTagName("question");
+
+	// loop thru the questions
+	foreach ($questions as $one) {
+		// grab the question
+		$question = $one -> getAttribute("text");
+
+		// grab the choices
+		$choices = $one -> getElementsByTagName("answer");
+
+		// create the div for the question
+		$result .= startDiv("", "questionBlock");
+
+		// add the question as an input
+		$result .= "<label class='questionLabel'>Question:</label>\n";
+		$result .= "<br />\n";
+		// add delete image
+		$result .= startDiv("", "questionDiv");
+		$result .= "<img class='deleteQImg' onclick='deleteItem(this.parentNode.parentNode)' src='img/DeleteRed.png' />\n";
+		$result .= '<input type="text" class="questionInput" value="'.$question.'" />'."\n";
+		$result .= endDiv();
+
+		$result .= "<label class='choiceLabel'>Choices:</label>\n";
+		$result .= "<br />\n";
+		// loop through the choices
+		foreach ($choices as $two) {
+			$two = $two -> getAttribute("text");
+			// add each choice
+			$result .= startDiv("", "choiceDiv");
+			// add delete image
+			$result .= "<img class='deleteCImg' onclick='deleteItem(this.parentNode)' src='img/DeleteRed.png' />\n";
+			// add input
+			$result .= '<input type="text" class="choiceInput" value="' . $two . '""/>'."\n";
+			$result .= endDiv();
+		}
+
+		// Add link to add choice
+		$result .= "<button type='button' onclick='addChoice(this)'>Add a Choice</button>\n";
+
+		// add link to add question
+		$result .= "<button type='button' onclick='addQuestion()' >Add a Question</button>\n";
+
+		// close the div for the question
+		$result .= endDiv();
+	}
 
 	// add reset button
-	$result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
+	// $result .= "<input type='reset' name='reset' value='reset'/>" . "\n";
 
 	// add submit button
 	$result .= "<input type='submit' name='submit' value='submit'/>" . "\n";
 
 	// create the form to display the file
-	$result .= "</form>";
+	$result .= "</form>\n";
 
 	return $result;
 }
 
 /**
  * Tries to submit the xml, by checking if it is valid, and writing it to the file
- * 
+ *
  * @param $fileName - file to write to
  * @param $xml - XML as a string to submit
  */
@@ -349,12 +399,12 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 
 	// create container
 	$result .= startDiv("", "acknowledgeDiv");
-	$result .= "<p>";
+	$result .= "<p>\n";
 
 	// check if it is valid against our schema
 	if (isValidXMLSource($xml, XML_SCHEMA)) {
 		// overwrite the file
-		if($overwrite && ($origSurveyName != $newSurveyName)){
+		if ($overwrite && ($origSurveyName != $newSurveyName)) {
 			// delete the original survey
 			deleteFile($origSurveyName);
 		}
@@ -379,7 +429,7 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 		// build the negative acknowledgement
 		$result .= "Could not edit: <span>$newSurveyName</span>";
 	}
-	$result .= "</p>";
+	$result .= "</p>\n";
 
 	// close container
 	$result .= endDiv();
@@ -388,12 +438,12 @@ function submitSurvey($origSurveyName, $newSurveyName, $xml, $overwrite) {
 }
 
 /**
- * Checks to see if the XML (passed as a string) is valid against a 
+ * Checks to see if the XML (passed as a string) is valid against a
  * schema (fileName of the schema)
- * 
+ *
  * @param $xml - xml in string format
- * @param $xmlSchema - name of schema file 
- * 
+ * @param $xmlSchema - name of schema file
+ *
  */
 function isValidXMLSource($xml, $xmlSchema) {
 	$result = false;

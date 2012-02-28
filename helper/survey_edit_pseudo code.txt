@@ -1,0 +1,66 @@
+The plan for implementing the edit survey page
+
+Have php generate the form based on the contents of the xml file
+
+This procedure can be used for the add or edit
+
+PHP
+	// Every questions will be contained in a div for styling
+	// the choices will be under the question, idented a little
+		// as well as child nodes, that way on delete, we kill it and its children
+	// for each item
+		// grab the question
+		// grab the choices
+		// create the div for the question
+		// add the question
+		// loop through the choices
+			// add each choice
+	
+
+
+JavaScript
+
+// for each question div
+	// add a link to add more choices
+		// create a function to facilitate.
+		// onclick add a single choice right before the link
+		// (might not be needed)incrememt hidden field for number of choices for this question 7
+		
+	// add a link to add another question
+		// create a function to facilitate.
+		// onclick add a question div to the end of the question div list
+	
+	
+--------------------------------------------
+Processing
+	
+JavaScript
+
+	// build the xml document based the questions and the choices as text and set
+	// to the hidden xml field
+	
+	// create the root node
+	// grab all the question divs
+	// for each question div
+		// build the question node
+		// grab all the choices within this div
+		//for each choice
+			// create the choice node
+			// attach to the question node
+		// attach question to the root node
+	// change the xml DOM to a string and set equal to the hidden xml field
+
+PHP 
+	// same as usual, except that the xml was attached to a hidden element
+		// which means nothing to PHP, but this is the only field to grab
+
+
+	
+	
+
+	
+
+
+
+
+

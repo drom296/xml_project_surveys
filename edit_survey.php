@@ -11,8 +11,11 @@ if($haveSurvey){
 	$title = "Taking Survey: $survey";
 }
 
+// add scripts
+$scripts = array("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js","js/guidedEdit.js");
+
 // create header tags
-$output = html_header($title, $styles);
+$output = html_header($title, $styles, $scripts);
 
 // HEADER Section *****************************************
 

@@ -1,14 +1,7 @@
 <?php
 require ("Lib_survey.php");
 
-$survey = "";
-$title = "Choose a Survey";
-
-// check to see if a survey was passed
-if (isset($_GET[SURVEY_FIELD]) && !empty($_GET[SURVEY_FIELD])) {
-	$survey = $_GET[SURVEY_FIELD];
-	$title = "Survey Results for: $survey";
-}
+$title = "Welcome";
 
 // create header tags
 $output = html_header($title, $styles);
@@ -32,19 +25,22 @@ $output .= endDiv("header");
 // start the content section
 $output .= startDiv("content", "roundBox");
 
-// one or the other
-if (empty($survey)) {
-	// create list of available surveys to take
-	$output .= addViewSurveyResultsLinks();
-} else {
-	// show the Results of the survey
-	$output .= displaySurveyResults($survey);
-	
-	// add link to take survey
-	$output .= "<div class='marginCenter textCenter'>\n<a href='take_survey.php' >Take another Survey?</a>\n</div>\n";
-}
+// grab the report.txt and place in a pre tag
+$report = file_get_contents("report.txt");
 
+// start the content section
+$output .= startDiv("", "marginCenter width70 roundBox");
 
+$output .= "<p class='reportLabel'>A report on design and implementation considerations, system architecture, <br />and design choices for the 
+final XML project</p>\n";
+// add to the output
+$output .= "<pre class='report'>$report</pre>\n";
+$output .= endDiv("");
+
+// add link to take survey
+$output .= "<div class='marginCenter textCenter'>\n<a href='xml/' >XML</a>\n</div>\n";
+$output .= "<div class='marginCenter textCenter'>\n<a href='xsd/' >XSD</a>\n</div>";
+$output .= "<div class='marginCenter textCenter'>\n<a href='xsl/' >XSL</a>\n</div>\n";
 
 // end the content section
 $output .= endDiv("content");
